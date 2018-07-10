@@ -1,2 +1,2 @@
-# jmdf
-financial software
+# easyschool
+School Management System ( Easy School )
