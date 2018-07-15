@@ -55,4 +55,9 @@ $route['404_override'] = '';
 
 $route['dashboard'] = '/home/index';
 
+
+$route['branches'] = '/settings/branches';
+$route['newbranch'] = '/settings/newbranch';
+$route['financial'] = '/settings/financial';
+
 $route['translate_uri_dashes'] = FALSE;

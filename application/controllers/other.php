@@ -1,23 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Other extends CI_Controller {
 
-	public function index() {
+	public function message() {
 		log_message('debug', 'sql query fail in... ', false);
-		$data['title'] = 'Dashboard';
 		$data['body'] = 'home/dashboard';
 		$this->load->view('layout',$data);
 	}
 
-	public function forget() {
+	public function expences() {
 		log_message('debug', 'sql query fail in... ', false);
 		$this->load->view('login/forget');
 	}
 
-	public function register() {
+	public function daybook() {
 		log_message('debug', 'sql query fail in... ', false);
 		$this->load->view('login/register');
 	}
 
 }
+

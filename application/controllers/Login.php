@@ -62,6 +62,7 @@ class Login extends CI_Controller {
              */
             $loginData = $this->logintable->getLoginData($username);
 
+            print_r($loginData);
             /**
              * This condtion varifyes, is given username exist in database or not
              * if its exist in database then it has some value otherwise it dosen't.

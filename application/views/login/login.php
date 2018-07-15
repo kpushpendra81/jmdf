@@ -44,7 +44,7 @@
             <button class="btn btn-primary btn-block" type="submit">Sign in</button>
           </form>
         </div>
-      </div>∂
+      </div>
     </div>
     <script src="<?= base_url(); ?>assets/js/vendor.min.js"></script>
     <script src="<?= base_url(); ?>assets/js/elephant.min.js"></script>
