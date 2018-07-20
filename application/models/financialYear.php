@@ -1,28 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Branch extends CI_Model {
+class FinancialYear extends CI_Model {
 
 	/**
 	 * @param  [String]   username       [give by username from login form.]
 	 * @return [array]                 	 return login table Data getting from database according given username.
 	 */
-	function getBranch() {
+	function getFsd() {
 		
-		$result = $this->db->get('branch');
+		$result = $this->db->get('financialYear');
 		
 		/**
 		 * 	return login table Data getting from database according that username.
 		 */
 		return $result->result();
-	}
-
-	function setBranch($data) {
-		if($this->db->insert('branch', $data)):
-			return true;
-		else:
-			return false;
-		endif;
 	}
 
 

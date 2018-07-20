@@ -220,7 +220,7 @@
                   </a>
                   <ul class="sidenav level-2 collapse">
                     <li class="sidenav-heading">Settings</li>
-                    <li><a href="<?= base_url() ?>financial.html">Financial Year</a></li>
+                    <!-- <li><a href="<?= base_url() ?>financial.html">Financial Year</a></li> -->
                     <li><a href="<?= base_url() ?>branches.html">Branches</a></li>
                     <li><a href="<?= base_url() ?>plans.html">Plans</a></li>
                   </ul>
@@ -232,7 +232,7 @@
                   </a>
                   <ul class="sidenav level-2 collapse">
                     <li class="sidenav-heading">Employee</li>
-                    <li><a href="<?= base_url() ?>newEmployee.html">New</a></li>
+                    <li><a href="<?= base_url() ?>newemploye.html">New</a></li>
                     <li><a href="<?= base_url() ?>employes.html">Employes</a></li>
                   </ul>
                 </li>

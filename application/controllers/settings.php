@@ -30,21 +30,25 @@ class Settings extends CI_Controller {
 
 		if ($this->input->server('REQUEST_METHOD') == 'GET') {
 
+			$this->load->model('financialYear');
+			$fad = $this->financialYear->getFsd();
 			$data['title'] = 'New Branch';
+			$data['fsd'] = $fad;
 			$data['body'] = 'settings/newbranch';
 			$this->load->view('layout', $data);
 		}
 		else if ($this->input->server('REQUEST_METHOD') == 'POST') {
 
 			$this->load->library('form_validation');
+			$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
 			$this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('address', 'Full Address', 'required');
 			$this->form_validation->set_rules('city', 'City', 'required');
 			$this->form_validation->set_rules('state', 'State', 'required');
-			$this->form_validation->set_rules('pincode', 'Pincode', 'required');
-			$this->form_validation->set_rules('mobile', 'Mobile', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'required');
-			$this->form_validation->set_rules('fsd', 'Financial Start Date', 'required');
+			$this->form_validation->set_rules('pin', 'Pincode', 'required|min_length[6]|max_length[6]');
+			$this->form_validation->set_rules('mobile', 'Mobile', 'required|min_length[10]|max_length[10]');
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+			$this->form_validation->set_rules('fsdID', 'Financial Start Date', 'required');
 
 			if ($this->form_validation->run() == FALSE):
 
@@ -54,9 +58,12 @@ class Settings extends CI_Controller {
 
 		    else:
 
-		    	$data['title'] = 'All Branch';
-				$data['body'] = 'settings/setFinancial';
-				$this->load->view('layout',$data);
+		    	$this->load->model("branch");
+		    	if($this->branch->setBranch($this->input->post())):
+		    		redirect(base_url().'branches.html');
+		    	else:
+		    		redirect(base_url().'branches/false');
+		    	endif;
 
 		    endif;
 		}
