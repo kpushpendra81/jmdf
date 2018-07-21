@@ -16,6 +16,9 @@
     <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="manifest.json">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#f7a033">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url(); ?>assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="<?= base_url(); ?>assets/img/favicon-16x16.png" sizes="16x16">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,700">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/vendor.min.css">
