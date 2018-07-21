@@ -30,7 +30,7 @@ class Settings extends CI_Controller {
 
 		if ($this->input->server('REQUEST_METHOD') == 'GET') {
 
-			$this->load->model('financialYear');
+			$this->load->model('financialyear');
 			$fad = $this->financialYear->getFsd();
 			$data['title'] = 'New Branch';
 			$data['fsd'] = $fad;
