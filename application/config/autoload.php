@@ -132,4 +132,4 @@ $autoload['language'] = array('seo');
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('auth/logintable');
+$autoload['model'] = array();
