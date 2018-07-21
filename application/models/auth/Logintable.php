@@ -23,5 +23,14 @@ class Logintable extends CI_Model {
 		return $result->result();
 	}
 
+	function setLogin($loginData) {
+		
+		if($this->db->insert('login', $loginData)):
+			return $this->db->insert_id();
+		else:
+			return false;
+		endif;
+	}
+
 
 }

@@ -15,7 +15,7 @@
 	          <strong>New Employee</strong>
 	        </div>
 	        <div class="card-body">
-
+	          
 	          <div class="demo-form-wrapper">
 	            <form  id="demo-inputmask" class="form form-horizontal" method="post">
 
@@ -54,7 +54,7 @@
 	                  	<option>-Select Gender-</option>
 	                  	<?php foreach ($gender as $key => $value) {
 	                  		$sel = set_value('gender') == $value ? " selected" : "";
-	                  		echo '<option value="'.$value.''.$sel.'">'.$value.'</option>';
+	                  		echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>';
 	                  	}
 	                  	?>
 	                  </select>
@@ -67,7 +67,7 @@
 	                  	<option>-Select Category-</option>
 	                  	<?php foreach ($category as $key => $value) {
 	                  		$sel = set_value('category') == $value ? " selected" : "";
-	                  		echo '<option value="'.$value.''.$sel.'">'.$value.'</option>';
+	                  		echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>';
 	                  	}
 	                  	?>
 	                  </select>
@@ -176,7 +176,7 @@
 	                  	<option>-Select Branch-</option>
 	                  	<?php foreach ($branch as $key => $value) {
 	                  		$sel = set_value('branchID') == $value->id ? " selected" : "";
-	                  		echo '<option value="'.$value->id.''.$sel.'">'.$value->title.'</option>';
+	                  		echo '<option value="'.$value->id.'" '.$sel.'>'.$value->title.'</option>';
 	                  	}
 	                  	?>
 	                  </select>
@@ -188,8 +188,8 @@
 	                  <select class="form-control" name="isAdmin" required="required">
 	                  	<option>-Select Authority-</option>
 	                  	<?php foreach ($isAdmin as $key => $value) {
-	                  		$sel = set_value('isAdmin') == $value ? " selected" : "";
-	                  		echo '<option value="'.$value.''.$sel.'">'.$key.'</option>';
+	                  		$sel = set_value('isAdmin') == $value ? "selected" : "";
+	                  		echo '<option value="'.$value.'" '.$sel.'>'.$key.'</option>';
 	                  	}
 	                  	?>
 	                  </select>
