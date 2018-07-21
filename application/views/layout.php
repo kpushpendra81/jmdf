@@ -210,7 +210,7 @@
                 </li>
                 <li class="sidenav-heading">Navigation</li>
                 <li class="sidenav-item">
-                  <a href="page-layouts.html">
+                  <a href="<?= base_url() ?>dashboard.html">
                     <span class="sidenav-icon icon icon-works">&#103;</span>
                     <span class="sidenav-label">Dashboards</span>
                   </a>
