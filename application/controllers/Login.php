@@ -50,11 +50,6 @@ class Login extends CI_Controller {
             $password = $this->input->post('password');
 
             /**
-             * loading the logintable model for authenticate user.
-             */
-            $this->load->model('auth/logintable');
-
-            /**
              * [	$loginData 
              * 		contains all login information which store in databse 
              * 		alongwith given username. or it may be empty array.]
