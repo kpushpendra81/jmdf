@@ -224,6 +224,7 @@
                   <ul class="sidenav level-2 collapse">
                     <li class="sidenav-heading">Settings</li>
                     <!-- <li><a href="<?= base_url() ?>financial.html">Financial Year</a></li> -->
+                    <li><a href="<?= base_url() ?>committees.html">Committees</a></li>
                     <li><a href="<?= base_url() ?>branches.html">Branches</a></li>
                     <li><a href="<?= base_url() ?>plans.html">Plans</a></li>
                   </ul>
@@ -246,7 +247,7 @@
                   </a>
                   <ul class="sidenav level-2 collapse">
                     <li class="sidenav-heading">Customer</li>
-                    <li><a href="<?= base_url() ?>newCustomer.html">New</a></li>
+                    <li><a href="<?= base_url() ?>newcustomer.html">New</a></li>
                     <li><a href="<?= base_url() ?>coustomer.html">Customers</a></li>
                   </ul>
                 </li>

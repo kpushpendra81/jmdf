@@ -57,11 +57,19 @@ $route['dashboard'] = '/home/index';
 
 
 $route['branches'] = '/settings/branches';
+$route['committees'] = '/settings/committees';
+$route['newcommittee'] = '/settings/newcommittee';
 $route['newbranch'] = '/settings/newbranch';
 $route['financial'] = '/settings/financial';
 
 
 $route['employes'] = '/employee/employes';
 $route['newemploye'] = '/employee/newemploye';
+$route['employebybranch'] = '/employee/employebybranch';
+
+$route['customers'] = '/customer/customers';
+$route['newcustomer'] = '/customer/newcustomer';
+
+
 
 $route['translate_uri_dashes'] = FALSE;

@@ -118,4 +118,28 @@ class Employee extends CI_Controller {
 		$this->load->view('layout',$data);
 	}
 
+	public function employebybranch() {
+		if ($this->input->server('REQUEST_METHOD') == 'POST'):
+
+			$branchID = $this->input->post('branchID');
+			$this->load->model('employe');
+			$branches = $this->employe->employebybranch($branchID);
+			
+			$response = array(
+				'success' => true,
+				'result' => $branches,
+				'message' => 'Success'
+			);
+
+		else:
+			$response = array(
+				"success" => false,
+				"result" => null,
+				"message" => "trying to access with wrong method."
+			);
+		endif; 
+
+		echo json_encode($response);
+	}
+
 }

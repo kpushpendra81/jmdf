@@ -15,6 +15,58 @@ class Settings extends CI_Controller {
 		$this->load->view('layout',$data);
 	}
 
+	public function committees() {
+		$this->load->model("commitee");
+		$commitee = $this->commitee->getAllCommittees();
+
+		$data['commitees']	= $commitee;
+		$data['title'] 	= 'Committees';
+		$data['body'] 	= 'settings/committees';
+
+		$this->load->view('layout',$data);
+	}
+
+	public function newcommittee() {
+		if ($this->input->server('REQUEST_METHOD') == 'GET') {
+			$this->load->model("branch");
+			$branch = $this->branch->getBranch();
+			$data['branch']		= $branch;
+			
+			$data['title'] = 'New Committee';
+			$data['body'] = 'settings/newcommittee';
+			$this->load->view('layout',$data);
+		}
+		else if ($this->input->server('REQUEST_METHOD') == 'POST') {
+
+			$this->load->library('form_validation');
+			$this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('branchID', 'Full Address', 'required');
+			$this->form_validation->set_rules('employeeID', 'City', 'required');
+
+			if ($this->form_validation->run() == FALSE):
+
+				$this->load->model("branch");
+				$branch = $this->branch->getBranch();
+				$data['branch']		= $branch;
+				
+				$data['title'] = 'New Committee';
+				$data['body'] = 'settings/newcommittee';
+				$this->load->view('layout',$data);
+
+		    else:
+
+		    	$this->load->model("commitee");
+		    	if($this->commitee->setCommittee($this->input->post())):
+		    		redirect(base_url().'committees.html');
+		    	else:
+		    		redirect(base_url().'committees/false');
+		    	endif;
+
+		    endif;
+		}
+	}
+
 	public function branches() {
 
 		$this->load->model('branch');

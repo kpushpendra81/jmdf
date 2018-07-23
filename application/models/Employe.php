@@ -27,5 +27,11 @@ class Employe extends CI_Model {
 		endif;
 	}
 
+	function employebybranch($branchID) {
+		$this->db->where('branchID', $branchID);
+		$result = $this->db->get('employee');
+		return $result->result();
+	}
+
 
 }
