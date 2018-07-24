@@ -5,15 +5,16 @@ class Customer extends CI_Controller {
 
 	public function newcustomer() {
 		if ($this->input->server('REQUEST_METHOD') == 'GET') {
+
 			$this->load->model("branch");
 			$branch = $this->branch->getBranch();
 
-			$data['category'] = ['GEN','OBC','SC','ST','OTHER'];
+			$data['category'] 	= ['GEN','OBC','SC','ST','OTHER'];
 			$data['gender'] 	= ['MALE','FEMALE','OTHER'];
 			$data['isAdmin'] 	= array("NO" => 0, "YES" => 1);
 			$data['branch']		= $branch;
-			$data['title'] = 'New Employee';
-			$data['body'] = 'customer/newCustomer';
+			$data['title'] 		= 'New Customer';
+			$data['body'] 		= 'customer/newCustomer';
 			$this->load->view('layout',$data);
 		}
 		else if ($this->input->server('REQUEST_METHOD') == 'POST') {

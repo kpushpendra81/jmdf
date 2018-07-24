@@ -15,6 +15,34 @@ class Settings extends CI_Controller {
 		$this->load->view('layout',$data);
 	}
 
+	public function rank() {
+		$this->load->model("rank");
+		$data['rank'] = $this->rank->getRanks();
+		$data['title'] = 'Rank Chart';
+		$data['body'] = 'settings/rank';
+		$this->load->view('layout',$data);
+	}
+
+	public function role() {
+		if ($this->input->server('REQUEST_METHOD') == 'GET') {
+
+			if(isset($_GET['branchID'])):
+				echo $this->input->get('branchID');
+			else:
+				$this->load->model("branch");
+				$branch = $this->branch->getBranch();
+				$data['branch']		= $branch;
+
+				$data['title'] = 'Role';
+				$data['body'] = 'settings/role';
+				$this->load->view('layout',$data);
+			endif;
+		}
+		else if($this->input->server('REQUEST_METHOD') == 'POST') {
+
+		}
+	}
+
 	public function committees() {
 		$this->load->model("commitee");
 		$commitee = $this->commitee->getAllCommittees();
@@ -65,6 +93,30 @@ class Settings extends CI_Controller {
 
 		    endif;
 		}
+	}
+
+	public function comitteebybranch() {
+		if ($this->input->server('REQUEST_METHOD') == 'POST'):
+
+			$branchID = $this->input->post('branchID');
+			$this->load->model('commitee');
+			$committee = $this->commitee->committeebybranch($branchID);
+			
+			$response = array(
+				'success' => true,
+				'result' => $committee,
+				'message' => 'Success'
+			);
+
+		else:
+			$response = array(
+				"success" => false,
+				"result" => null,
+				"message" => "trying to access with wrong method."
+			);
+		endif; 
+
+		echo json_encode($response);
 	}
 
 	public function branches() {

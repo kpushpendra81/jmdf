@@ -173,21 +173,21 @@
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-1">Branch</label>
 	                <div class="col-sm-4">
-	                  <select class="form-control" name="branchID" required="required">
-	                  	<option>-Select Branch-</option>
-	                  	<?php foreach ($branch as $key => $value) {
-	                  		$sel = set_value('branchID') == $value->id ? " selected" : "";
-	                  		echo '<option value="'.$value->id.'" '.$sel.'>'.$value->title.'</option>';
-	                  	}
-	                  	?>
+	                  <select id="demo-select2-1" class="form-control" name="branchID" onchange="getComittee(this.value)" required="required">
+	                	<option>- Select Branch -</option>
+	                	<?php 
+	                		foreach ($branch as $key => $value):
+	                			echo '<option value="'.$value->id.'">'.$value->title.'</option>';
+	                		endforeach;
+	                	?>
 	                  </select>
 	                  <?= form_error('branchID'); ?>
 	                </div>
 
-	                <label class="col-sm-2 control-label" for="form-control-1">Password</label>
+	                <label class="col-sm-2 control-label" for="form-control-1">Commitee</label>
 	                <div class="col-sm-4">
-	                  <input id="form-control-1" class="form-control" name="password" type="password" required="required" value="<?= set_value('password'); ?>">
-	                  <?= form_error('password'); ?>
+		                <select id="demo-select2-2" class="form-control" name="committee" required="required"></select>
+	                  	<?= form_error('employeeID'); ?>
 	                </div>
 	              </div>
 
@@ -221,3 +221,16 @@
 	  </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function getComittee(branchID) {
+		$.ajax({
+			url: '<?= site_url() ?>comitteebybranch.html',
+			method: "POST",
+			data: {branchID: branchID},
+			success: function(data){
+				$(`#demo-select2-2`).html(JSON.parse(data).result.map(val => { return `<option value="${val.id}">${val.title}</option>` }).join(""))
+			}
+		})
+	}
+</script>

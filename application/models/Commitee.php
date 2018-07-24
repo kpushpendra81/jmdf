@@ -18,6 +18,11 @@ class Commitee extends CI_Model {
 		return $this->db->get('committee')->row();
 	}
 
+	function committeebybranch($branchID) {
+		$this->db->where('branchID', $branchID);
+		return $this->db->get('committee')->result();
+	}
+
 	function setCommittee($committee) {
 
 		if($this->db->insert('committee', $committee)):

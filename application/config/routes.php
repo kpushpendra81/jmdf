@@ -59,8 +59,11 @@ $route['dashboard'] = '/home/index';
 $route['branches'] = '/settings/branches';
 $route['committees'] = '/settings/committees';
 $route['newcommittee'] = '/settings/newcommittee';
+$route['comitteebybranch'] = '/settings/comitteebybranch';
 $route['newbranch'] = '/settings/newbranch';
 $route['financial'] = '/settings/financial';
+$route['rank'] = '/settings/rank';
+$route['role'] = '/settings/role';
 
 
 $route['employes'] = '/employee/employes';
