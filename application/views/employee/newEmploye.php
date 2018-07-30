@@ -166,6 +166,19 @@
 	                  <?= form_error('idProof'); ?>
 	                </div>
 
+	                <label class="col-sm-2 control-label" for="form-control-1">Rank</label>
+	                <div class="col-sm-4">
+	                  <select class="form-control" name="rank" required="required">
+	                  	<option>-Select Rank-</option>
+	                  	<?php foreach ($rank as $key => $value) {
+	                  		$sel = set_value('rank') == $value->id ? " selected" : "";
+	                  		echo '<option value="'.$value->id.'" '.$sel.'>'.$value->id.'</option>';
+	                  	}
+	                  	?>
+	                  </select>
+	                  <?= form_error('rank'); ?>
+	                </div>
+
 	                
 	              </div>
 

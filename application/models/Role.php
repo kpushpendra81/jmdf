@@ -16,4 +16,13 @@ class Role extends CI_Model {
 			return false;
 		endif;
 	}
+
+	function updateRole($role, $id) {
+		$this->db->where("id", $id);
+		if($this->db->update('role', $role)):
+			return true;
+		else:
+			return false;
+		endif;
+	}
 }

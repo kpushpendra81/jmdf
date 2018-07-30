@@ -8,10 +8,14 @@ class Employee extends CI_Controller {
 			$this->load->model("branch");
 			$branch = $this->branch->getBranch();
 
+			$this->load->model('rank');
+			$rank = $this->rank->getRanks();
+
 			$data['category'] = ['GEN','OBC','SC','ST','OTHER'];
 			$data['gender'] 	= ['MALE','FEMALE','OTHER'];
 			$data['isAdmin'] 	= array("NO" => 0, "YES" => 1);
 			$data['branch']		= $branch;
+			$data['rank']	= $rank;
 			$data['title'] = 'New Employee';
 			$data['body'] = 'employee/newEmploye';
 			$this->load->view('layout',$data);
@@ -96,7 +100,8 @@ class Employee extends CI_Controller {
 					"aadharNo" 		=> $this->input->post('aadharNo'),
 					"image" 		=> $this->input->post('image'),
 					"signature" 	=> $this->input->post('signature'),
-					"idProof" 		=> $this->input->post('idProof')
+					"idProof" 		=> $this->input->post('idProof'),
+					"rank" 			=> $this->input->post('rank')
 				);
 
 				if ($this->employe->setEmploye($employeData)):

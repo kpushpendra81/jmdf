@@ -27,8 +27,14 @@ class Settings extends CI_Controller {
 		if ($this->input->server('REQUEST_METHOD') == 'GET') {
 
 			if(isset($_GET['branchID'])):
-				echo $this->input->get('branchID');
+
+				$branchID = $this->input->get('branchID');
+				$this->load->model('role');
+				$result = $this->role->getRoles($branchID);
+				echo json_encode($result);
+
 			else:
+
 				$this->load->model("branch");
 				$branch = $this->branch->getBranch();
 				$data['branch']		= $branch;
@@ -36,9 +42,26 @@ class Settings extends CI_Controller {
 				$data['title'] = 'Role';
 				$data['body'] = 'settings/role';
 				$this->load->view('layout',$data);
+
 			endif;
 		}
 		else if($this->input->server('REQUEST_METHOD') == 'POST') {
+			$branchID = $this->input->post('branchID');
+			$title = $this->input->post('title');
+			
+			$roleData = array(
+				"branchID" => $branchID,
+				"title" => $title
+			);
+			$this->load->model('role');
+
+			if($this->input->post("edit") != 'false')
+				$this->role->updateRole($roleData, $this->input->post("id"));
+			else 
+				$this->role->setRole($roleData);
+
+			$result = $this->role->getRoles($branchID);
+			echo json_encode($result);
 
 		}
 	}

@@ -35,8 +35,8 @@
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-1">Role Title</label>
 	                <div class="col-sm-6">
-	                  <input id="form-control-1" class="form-control" name="title" type="text" required="required" value="<?= set_value('address'); ?>">
-	                  <?= form_error('address'); ?>
+	                  <input id="form-control-1" class="form-control" name="title" type="text" required="required">
+	                  <input id="roleID" type="hidden">
 	                </div>
 	              </div>
 
@@ -44,7 +44,7 @@
 	              <div class="form-group gutter-xs">
 	                <label class="col-sm-2 control-label" for="form-control-1">&nbsp;</label>
 	                <div class="col-sm-4 center">
-	                  <input type="submit" value="Save Branch" class="btn btn-primary">
+	                  <input type="submit" id="buttonRole" value="Save Role" class="btn btn-primary" onclick="setRole();">
 	                </div>
 	              </div>
 
@@ -67,9 +67,10 @@
                     <tr>
                       <th>#</th>
                       <th>Role Title</th>
+                      <th>Settings</th>
                     </tr>
                   </thead>
-                  <tbody></tbody>
+                  <tbody id="roleList"></tbody>
                 </table>
 
 	        </div>
@@ -88,10 +89,83 @@
 			method: "GET",
 			data: {branchID: branchID},
 			success: function(data){
-				alert(data)
+				let response = JSON.parse(data).map((val, idx) => {
+					return `<tr>
+						<td>${idx + 1}</td>
+						<td>${val.title}</td>
+						<td><button class="btn btn-primary" onclick="edit(${val.id}, ${val.branchID}, '${val.title}')">Edit</button></td>
+					</tr>`
+				}).join()
+				$('#roleList').html(response)
 			}
 		})
 	}
 
+	function setRole() {
+		let branchID = $('#demo-select2-1').val()
+		let title 	 = $('#form-control-1').val()
+
+		$.ajax({
+			url: '<?= site_url() ?>role.html',
+			method: 'POST',
+			data: {
+				"branchID": branchID, 
+				"title": title,
+				"edit": false
+			},
+			success: function(data) {
+				$('#form-control-1').val('')
+				alert(data)
+				let response = JSON.parse(data).map((val, idx) => {
+					return `<tr>
+						<td>${idx + 1}</td>
+						<td>${val.title}</td>
+						<td><button class="btn btn-primary" onclick="edit(${val.id}, ${val.branchID}, '${val.title}')">Edit</button></td>
+					</tr>`
+				}).join()
+				$('#roleList').html(response)
+			}
+		})
+	}
+
+	function updateRole() {
+		let branchID = $('#demo-select2-1').val()
+		let title 	 = $('#form-control-1').val()
+		let roleID 	 = $('#roleID').val()
+
+		$.ajax({
+			url: '<?= site_url() ?>role.html',
+			method: 'POST',
+			data: {
+				"branchID": branchID, 
+				"title": title,
+				"edit": true,
+				"id": roleID
+			},
+			success: function(data) {
+
+				$('#form-control-1').val('')
+				$("#buttonRole").val("Save Role")
+				$("#buttonRole").attr("onclick","setRole()")
+
+				let response = JSON.parse(data).map((val, idx) => {
+					return `<tr>
+						<td>${idx + 1}</td>
+						<td>${val.title}</td>
+						<td><button class="btn btn-primary" onclick="edit(${val.id}, ${val.branchID}, '${val.title}')">Edit</button></td>
+					</tr>`
+				}).join()
+				$('#roleList').html(response)
+			}
+		})
+	}
+
+	function edit(roleID, branchID, title){
+		$('#demo-select2-1').val(branchID)
+		$('#form-control-1').val(title)
+		$('#roleID').val(roleID)
+		$("#buttonRole").val("Edit Role")
+		$("#buttonRole").attr("onclick","updateRole()")
+	}
 	
 </script>
