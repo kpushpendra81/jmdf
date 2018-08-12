@@ -65,6 +65,8 @@ $route['financial'] = '/settings/financial';
 $route['rank'] = '/settings/rank';
 $route['role'] = '/settings/role';
 
+$route['plans'] = 'plans/getplans';
+
 
 $route['employes'] = '/employee/employes';
 $route['newemploye'] = '/employee/newemploye';
