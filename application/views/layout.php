@@ -250,7 +250,7 @@
                   <ul class="sidenav level-2 collapse">
                     <li class="sidenav-heading">Customer</li>
                     <li><a href="<?= base_url() ?>newcustomer.html">New</a></li>
-                    <li><a href="<?= base_url() ?>coustomer.html">Customers</a></li>
+                    <li><a href="<?= base_url() ?>customers.html">Customers</a></li>
                   </ul>
                 </li>
                 <li class="sidenav-item has-subnav">

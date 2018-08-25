@@ -17,7 +17,7 @@
 	        <div class="card-body">
 	          
 	          <div class="demo-form-wrapper">
-	            <form  id="demo-inputmask" class="form form-horizontal" method="post">
+	            <form id="demo-inputmask" class="form form-horizontal" method="post" enctype="multipart/form-data">
 
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-1">Name</label>
@@ -148,13 +148,13 @@
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-17">Image</label>
 	                <div class="col-sm-4">
-	                  <input id="form-control-17" class="form-control" name="image" type="file" required="required" value="<?= set_value('image'); ?>">
+	                  <input id="form-control-17" class="form-control" name="image" type="file" required="required">
 	                  <?= form_error('image'); ?>
 	                </div>
 
 	                <label class="col-sm-2 control-label" for="form-control-18">Signature</label>
 	                <div class="col-sm-4">
-	                  <input id="form-control-18" class="form-control" name="signature" type="file" required="required" value="<?= set_value('signature'); ?>">
+	                  <input id="form-control-18" class="form-control" name="signature" type="file" required="required">
 	                  <?= form_error('signature'); ?>
 	                </div>
 	              </div>
@@ -162,7 +162,7 @@
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-19">ID-Proof</label>
 	                <div class="col-sm-4">
-	                  <input id="form-control-19" class="form-control" name="idProof" type="file" required="required" value="<?= set_value('idProof'); ?>">
+	                  <input id="form-control-19" class="form-control" name="idProof" type="file" required="required">
 	                  <?= form_error('idProof'); ?>
 	                </div>
 	                
@@ -189,14 +189,14 @@
 	                <label class="col-sm-2 control-label" for="form-control-21">Commitee</label>
 	                <div class="col-sm-4">
 		                <select id="demo-select2-2" class="form-control" name="committee" required="required"></select>
-	                  	<?= form_error('employeeID'); ?>
+	                  	<?= form_error('committee'); ?>
 	                </div>
 	              </div>
 
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-22">Plan Name</label>
 	                <div class="col-sm-4">
-	                  <select id="demo-select2-3" class="form-control" name="planID" onchange="getPlan(this.value)" required="required">
+	                  <select id="demo-select2-3" class="form-control" name="planID" onchange="getPlan(this.value)">
 	                	<option>- Select Plan -</option>
 	                	<?php 
 	                		foreach ($plans as $key => $value):
@@ -205,27 +205,24 @@
 	                	?>
 	                  </select>
 	                  <?= form_error('planID'); ?>
+	                  <input type="hidden" id="planDetail" />
 	                </div>
 
-	                <label class="col-sm-2 control-label" for="form-control-1">Duration</label>
-	                <div class="col-sm-4">
-		                <select id="demo-select2-4" class="form-control" name="duration" required="required"></select>
-	                  <?= form_error('employeeID'); ?>
-	                  <input type="hidden" id="planDetail">
-	                </div>
+	                <label class="col-sm-2 control-label" id="durationTitle" for="form-control-1">Duration</label>
+	                <div class="col-sm-4" id="durationSelect"></div>
 	              </div>
 
 	              <span id="fd" style="display: none;">
 		              <div class="form-group">
 		                <label class="col-sm-2 control-label" for="form-control-23">Investment Amount</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-23" class="form-control" name="investAmount" type="number" required="required" value="<?= set_value('username'); ?>">
+		                	<input id="form-control-23" class="form-control" name="investAmount-fd" type="number" onkeyup="calculateMeturity(this.value)" />
 		                  <?= form_error('investAmount'); ?>
 		                </div>
 
 		                <label class="col-sm-2 control-label" for="form-control-24">Meturity Amount</label>
 		                <div class="col-sm-4">
-			                <input id="form-control-25" class="form-control" name="meturtyAmount" type="number" required="required" value="<?= set_value('username'); ?>">
+			                <input id="form-control-25" class="form-control" name="meturtyAmount-fd" type="number"/>
 		                  <?= form_error('meturtyAmount'); ?>
 		                </div>
 		              </div>
@@ -233,7 +230,7 @@
 		              <div class="form-group">
 		                <label class="col-sm-2 control-label" for="form-control-26">Applied Interest Rate</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-26" readonly="true" name="appliedInterest" class="form-control" type="text">
+		                	<input id="form-control-26" readonly="true" name="appliedInterest-fd" class="form-control" type="text">
 		                  <?= form_error('appliedInterest'); ?>
 		                </div>
 		              </div>
@@ -244,13 +241,13 @@
 		              <div class="form-group">
 		                <label class="col-sm-2 control-label" for="form-control-27">Investment Monthly Amount</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-27" class="form-control" name="investAmount" type="number" required="required" value="<?= set_value('username'); ?>">
-		                  <?= form_error('investAmount'); ?>
+		                	<input id="form-control-27" class="form-control" name="monthInvestAmount-rd" type="number" onkeyup="calculateMeturity(this.value)" />
+		                  <?= form_error('monthInvestAmount'); ?>
 		                </div>
 
 		                <label class="col-sm-2 control-label" for="form-control-28">Total Amount</label>
 		                <div class="col-sm-4">
-			                <input id="form-control-28" class="form-control" name="meturtyAmount" type="number" required="required" value="<?= set_value('username'); ?>">
+			                <input id="form-control-28" class="form-control" name="investAmount-rd" type="number" />
 		                  <?= form_error('meturtyAmount'); ?>
 		                </div>
 		              </div>
@@ -258,13 +255,13 @@
 		              <div class="form-group">
 		                <label class="col-sm-2 control-label" for="form-control-29">Meturity Amount</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-29" class="form-control" name="investAmount" type="text" required="required" value="<?= set_value('username'); ?>">
+		                	<input id="form-control-29" class="form-control" name="meturtyAmount-rd" type="text"/>
 		                  <?= form_error('investAmount'); ?>
 		                </div>
 		                
 		                <label class="col-sm-2 control-label" for="form-control-30">Applied Interest Rate</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-30" readonly="true" name="appliedInterest" class="form-control" type="text">
+		                	<input id="form-control-30" readonly="true" name="appliedInterest-rd" class="form-control" type="text">
 		                  <?= form_error('appliedInterest'); ?>
 		                </div>
 		              </div>
@@ -272,42 +269,42 @@
 		              
 	              </span>
 
-	              <span id="mis" style="display: none;">
+	              <span id="mip" style="display: none;">
 		              <div class="form-group">
 		                <label class="col-sm-2 control-label" for="form-control-31">Investment Amount</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-31" class="form-control" name="investAmount" type="text" required="required" value="<?= set_value('username'); ?>">
+		                	<input id="form-control-31" class="form-control" name="investAmount-mip" onkeyup="misCalculation(this.value)" type="number"/>
 		                  <?= form_error('investAmount'); ?>
 		                </div>
 
 		                <label class="col-sm-2 control-label" for="form-control-32">Monthly Return Amount</label>
 		                <div class="col-sm-4">
-			                <input id="form-control-32" class="form-control" name="meturtyAmount" type="text" required="required" value="<?= set_value('username'); ?>">
-		                  <?= form_error('meturtyAmount'); ?>
+			                <input id="form-control-32" class="form-control" readonly="true" name="monthlyReturn-mip" type="text" />
+		                  <?= form_error('monthlyReturn'); ?>
 		                </div>
 		              </div>
 
 		              <div class="form-group">
 		                <label class="col-sm-2 control-label" for="form-control-33">Meturity Amount</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-33" class="form-control" name="investAmount" type="text" required="required" value="<?= set_value('username'); ?>">
-		                  <?= form_error('investAmount'); ?>
+		                	<input id="form-control-33" class="form-control" readonly="true" name="meturityAmount-mip" type="text"/>
+		                  <?= form_error('meturityAmount'); ?>
 		                </div>
 
 		                <label class="col-sm-2 control-label" for="form-control-34">Applied Interest Rate</label>
 		                <div class="col-sm-4">
-		                	<input id="form-control-34" readonly="true" name="appliedInterest" class="form-control" type="text">
+		                	<input id="form-control-34" readonly="true" name="appliedInterest-mip" class="form-control" type="text">
 		                  <?= form_error('appliedInterest'); ?>
 		                </div>
 		              </div>
 		              
 	              </span>
 
-	              <span id="mip" style="display: none;">
+	              <span id="nps" style="display: none;">
 		              <div class="form-group">
 		                <label class="col-sm-2 control-label" for="form-control-1">Plan Amount</label>
 		                <div class="col-sm-4">
-		                	<select id="demo-select2-5" class="form-control" name="planAMount" onchange="getperMonthAmount(this.value)" required="required">
+		                	<select id="demo-select2-5" class="form-control" name="planAMount-nps" onchange="getperMonthAmount(this.value)">
 		                		<option>-Select Amount-</option>
 		                		<option value="1000">1000/Month</option>
 		                		<option value="2000">2000/Month</option>
@@ -318,17 +315,36 @@
 		                </div>
 
 		                <label class="col-sm-2 control-label" for="form-control-1">Monthely Amount</label>
+		                <div class="col-sm-4" id="monthAmount">
+		                  <?= form_error('monthAmount'); ?>
+		                </div>
+		              </div>
+
+		              <div class="form-group">
+		                <label class="col-sm-2 control-label" for="planDuration">Total Amount</label>
 		                <div class="col-sm-4">
-			                <select id="demo-select2-6" class="form-control" name="duration" required="required"></select>
+			                <input id="totalAmount" readonly="true" class="form-control" name="totalAmount-nps" type="text" />
+		                  <?= form_error('totalAmount'); ?>
+		                </div>
+
+		                <label class="col-sm-2 control-label" for="form-control-36">5 Years Meturity Amount</label>
+		                <div class="col-sm-4">
+			                <input id="form-control-36" readonly="true" class="form-control" name="meturtyAmount-nps" type="text"/>
 		                  <?= form_error('meturtyAmount'); ?>
 		                </div>
 		              </div>
 
 		              <div class="form-group">
-		                <label class="col-sm-2 control-label" for="form-control-36">Meturity Amount</label>
+		                <label class="col-sm-2 control-label" for="investerAge">Invester Age</label>
 		                <div class="col-sm-4">
-			                <input id="form-control-36" class="form-control" name="meturtyAmount" type="text" required="required" value="<?= set_value('username'); ?>">
-		                  <?= form_error('meturtyAmount'); ?>
+		                	<input id="investerAge" class="form-control" readonly="true" name="investorAge-nps" type="text">
+		                  <?= form_error('investorAge'); ?>
+		                </div>
+
+		                <label class="col-sm-2 control-label" for="form-control-34">Applied Interest Rate</label>
+		                <div class="col-sm-4">
+		                	<input id="form-control-341" readonly="true" name="appliedInterest-nps" class="form-control" type="text">
+		                  <?= form_error('appliedInterest'); ?>
 		                </div>
 		              </div>
 		              
@@ -341,13 +357,13 @@
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-37">Username</label>
 	                <div class="col-sm-4">
-	                  <input id="form-control-37" class="form-control" name="username" type="text" required="required" value="<?= set_value('username'); ?>">
+	                  <input id="form-control-37" class="form-control" name="username" type="text" required="required">
 	                  <?= form_error('username'); ?>
 	                </div>
 
 	                <label class="col-sm-2 control-label" for="form-control-38">Password</label>
 	                <div class="col-sm-4">
-	                  <input id="form-control-38" class="form-control" name="password" type="password" required="required" value="<?= set_value('password'); ?>">
+	                  <input id="form-control-38" class="form-control" name="password" type="password" required="required">
 	                  <?= form_error('password'); ?>
 	                </div>
 	              </div>
@@ -387,7 +403,10 @@
 			method: "POST",
 			data: {id: planID},
 			success: function(data){
-				$(`planDetail`).val(data)
+
+				let durationFlag = false
+
+				$(`#planDetail`).val(data)
 
 				if(planID == '1')
 					$("#fd").removeAttr("style")
@@ -399,26 +418,121 @@
 				else
 					$("#rd").css("display", "none")
 
-				if(planID == '3')
-					$("#mis").removeAttr("style")
-				else
-					$("#mis").css("display", "none")
+				if(planID == '3'){
+					$("#nps").removeAttr("style")
+					$("#durationTitle").html("Policy Age")
+
+					let dob = $("#form-control-4").val()
+					if(dob == ''){
+						alert("Please provide (Date of Birth)-DOB first.")
+						$("#form-control-4").focus()
+
+						$("#nps").css("display", "none")
+						$("#durationTitle").html("Duration")
+						$("#demo-select2-3").val($("#demo-select2-3 option:first").val())
+
+						durationFlag = true
+					}
+					else {
+						dob = dob.split("-")
+						const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 31556925994)
+						let age = getAge(`${dob[2]}-${dob[1]}-${dob[0]}`)
+						$("#investerAge").val(age) // 23
+
+						if(parseInt(age) < 18) {
+							alert("Candidate must be adult, age grater then 18.")
+							$("#nps").css("display", "none")
+							$("#durationTitle").html("Duration")
+							$("#demo-select2-3").val($("#demo-select2-3 option:first").val())
+							durationFlag = true
+						}
+					}
+
+				}
+				else{
+					$("#nps").css("display", "none")
+					$("#durationTitle").html("Duration")
+				}
 
 				if(planID == '4')
 					$("#mip").removeAttr("style")
 				else
 					$("#mip").css("display", "none")
-				
 
-				$(`#demo-select2-4`).html(`<option>-Select Duration-</option>` + JSON.parse(data).result.map(val => { return `<option value="${val.duration}">${val.duration} Years</option>` }).join(""))
+				if(planID == '3'){
+					let options = `<option value="">-select Duration-</option>`
+					let age = $("#investerAge").val()
+					age = parseInt(age)
+
+					if(parseInt(age) < 18){
+						options += ``
+					}
+					else if(age >= 18 && age <= 25) {
+						if(age == 25){
+							options += `<option value="35">35</option><option value="42">42</option>`
+						}
+						else {
+							options += `<option value="42">42</option>`
+						}
+					}
+					else if(age >= 25 && age <= 30) {
+						if(age == 30){
+							options += `<option value="30">30</option><option value="35">35</option>`
+						}
+						else {
+							options += `<option value="35">35</option>`
+						}
+					}
+					else if(age >= 30 && age <= 35) {
+						if(age == 35){
+							options += `<option value="25">25</option><option value="30">30</option>`
+						}
+						else {
+							options += `<option value="30">30</option>`
+						}
+					}
+					else if(age >= 35 && age <= 40) {
+						if(age == 40){
+							options += `<option value="20">20</option><option value="25">25</option>`
+						}
+						else {
+							options += `<option value="25">25</option>`
+						}
+					}
+					else if(age >= 40 && age <= 45) {
+						if(age == 45){
+							options += `<option value="10">10</option><option value="20">20</option>`
+						}
+						else {
+							options += `<option value="20">20</option>`
+						}
+					}
+					else if(age >= 45 && age <= 50) {
+							options += `<option value="10">10</option>`
+					}
+					else {
+						options += `<option value="">Not eligble for plan, you are over-age.</option>`
+					}
+
+					let select = `<select id="demo-select2-4" class="form-control" name="duration" onchange='getAppliedInterestRate(this.value);'>${options}</select>`
+					$(`#durationSelect`).html(select)
+
+					if(durationFlag)
+						$(`#durationSelect`).html('')
+				}
+				else {
+					let options = `<option value="">-select Duration-</option>`
+					options += JSON.parse(data).result.map(val => { return `<option value='${val.duration}'>${val.duration} Years</option>` }).join("")
+					let select = `<select id="demo-select2-4" class="form-control" name="duration" onchange='getAppliedInterestRate(this.value);'>${options}</select>`
+					$(`#durationSelect`).html(select)
+				}
+
 			}
 		})
 	}
 
 	function getperMonthAmount(plan) {
 		let amountArray = []
-
-		alert(plan)
 
 		if(plan == "1000")
 			amountArray = [100,120,140,168,210,420]
@@ -440,9 +554,80 @@
 		options += amountArray.map(val => {
 			return `<option value="${val}">${val}</option>`
 		}).join("")
+		options = `<select id="demo-select2-6" class="form-control" name="monthAmount-nps" onchange="getNpsDetail(this.value)">${options}</select>`
+		$("#monthAmount").html(options)
+	}
 
-		alert(options)
-		$("#demo-select2-6").html(options)
+	function getNpsDetail(amountPerMonth) {
+		let planData = JSON.parse(document.getElementById(`planDetail`).value)
+		let duration = $("#demo-select2-4").val()
+		let totalDurationMonth = parseInt(duration) * 12
+		let totalAmt = totalDurationMonth * parseInt(amountPerMonth)
+		$("#totalAmount").val(totalAmt)
+		$("#form-control-36").val(((totalAmt * 38) / 100) + totalAmt)
+		$("#form-control-341").val("38%")
+	}
 
+	function getAppliedInterestRate(duration) {
+		let plan = document.getElementById('demo-select2-3').value
+		let planData = JSON.parse(document.getElementById(`planDetail`).value)
+
+		if(plan == '1') {
+			let intrestRate = planData.result.filter(val => { return val.duration == duration })
+			$("#form-control-26").val(`${intrestRate[0].percentage}%`)
+			if($("#form-control-23").val() != "") {
+				let investAmount = $("#form-control-23").val()
+				let appliedInterest = document.getElementById(`form-control-26`).value.split("%")[0]
+				$("#form-control-25").val(((parseFloat(investAmount) * parseFloat(appliedInterest))/100) + parseFloat(investAmount))
+			}
+		}
+
+		if(plan == '2') {
+			let intrestRate = planData.result.filter(val => { return val.duration == duration })
+			$("#form-control-30").val(`${intrestRate[0].intrastRate}%`)
+			if($("#form-control-27").val() != '') {
+				let investAmount = $("#form-control-27").val()
+				let appliedInterest = document.getElementById(`form-control-30`).value.split("%")[0]
+				let totalAMount = (parseFloat(duration) * 12) * parseFloat(investAmount)
+				$("#form-control-28").val(totalAMount)
+				$("#form-control-29").val( ((totalAMount * parseFloat(appliedInterest)) / 100) + totalAMount )
+			}
+		}
+
+		if(plan == '4') {
+			let intrestRate = planData.result.filter(val => { return val.duration == duration })
+			$("#form-control-34").val(`${intrestRate[0].meturityInterest}%`)
+			if($("#form-control-31").val() != '') {
+				let investAmount = $("#form-control-31").val()
+				let appliedInterest = document.getElementById(`form-control-34`).value.split("%")[0]
+				$("#form-control-32").val(((investAmount * 2) / 100))
+				$("#form-control-33").val( ((investAmount * parseFloat(appliedInterest)) / 100) + investAmount )
+			}
+		}
+
+	}
+
+	function misCalculation(investAmount) {
+		investAmount = parseInt(investAmount)
+		let appliedInterest = document.getElementById(`form-control-34`).value.split("%")[0]
+		$("#form-control-32").val(((investAmount * 2) / 100))
+		$("#form-control-33").val( ((investAmount * parseFloat(appliedInterest)) / 100) + investAmount )
+	}
+
+	function calculateMeturity(investAmount) {
+		let plan = document.getElementById('demo-select2-3').value
+		let appliedInterest = document.getElementById(`form-control-26`).value.split("%")[0]
+
+		if(plan == '1') {
+			$("#form-control-25").val(((parseFloat(investAmount) * parseFloat(appliedInterest))/100) + parseFloat(investAmount))
+		}
+
+		if(plan == '2') {
+			let duration = $("#demo-select2-4").val()
+			let appliedInterest = document.getElementById(`form-control-30`).value.split("%")[0]
+			let totalAMount = (parseFloat(duration) * 12) * parseFloat(investAmount)
+			$("#form-control-28").val(totalAMount)
+			$("#form-control-29").val( ((totalAMount * parseFloat(appliedInterest)) / 100) + totalAMount )
+		}
 	}
 </script>

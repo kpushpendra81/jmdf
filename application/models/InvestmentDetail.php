@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Employe extends CI_Model {
+class InvestmentDetail extends CI_Model {
     
     public function __construct() {
     	parent::__construct();
 	}
 
 	
-	function getAllEmployee() {
+	function getAllDetail() {
 
 		$result = $this->db->get('employee');
 		
@@ -18,9 +18,9 @@ class Employe extends CI_Model {
 		return $result->result();
 	}
 
-	function setEmploye($employe) {
+	function setDetail($detail) {
 
-		if($this->db->insert('employee', $employe)):
+		if($this->db->insert('investmentDetail', $detail)):
 			return $this->db->insert_id();
 		else:
 			return false;

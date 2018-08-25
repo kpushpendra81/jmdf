@@ -41,12 +41,12 @@ class Customer extends CI_Controller {
 			$this->form_validation->set_rules('mobile', 'Mobile', 'required|min_length[10]|max_length[10]');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('aadharNo', 'Aadhar Number', 'required');
-			$this->form_validation->set_rules('image', 'Image', 'required');
-			$this->form_validation->set_rules('signature', 'Siganture', '');
-			$this->form_validation->set_rules('idProof', 'ID Proof', 'required');
-
+			$this->form_validation->set_rules('image', 'File', 'trim|xss_clean');
+			$this->form_validation->set_rules('signature', 'File', 'trim|xss_clean');
+			$this->form_validation->set_rules('idProof', 'File', 'trim|xss_clean');
 
 			$this->form_validation->set_rules('branchID', 'branchID', 'required');
+			$this->form_validation->set_rules('committee', 'committee', 'required');
 			$this->form_validation->set_rules('username', 'username', 'required');
 			$this->form_validation->set_rules('password', 'password', 'required');
 
@@ -55,18 +55,22 @@ class Customer extends CI_Controller {
 				$this->load->model("branch");
 				$branch = $this->branch->getBranch();
 
+				$this->load->model("investmentPlans");
+				$plans = $this->investmentPlans->getPlans();
+
 				$data['category'] = ['GEN','OBC','SC','ST','OTHER'];
 				$data['gender'] 	= ['MALE','FEMALE','OTHER'];
 				$data['isAdmin'] 	= array("NO" => 0, "YES" => 1);
 				$data['branch']		= $branch;
-				$data['title'] = 'New Employee';
-				$data['body'] = 'employee/newEmploye';
+				$data['plans']		= $plans;
+				$data['title'] 		= 'New Customer';
+				$data['body'] 		= 'customer/newCustomer';
 				$this->load->view('layout',$data);
 
 			else:
 
 				$this->load->model("auth/logintable");
-		    	$this->load->model("employe");
+				$this->load->model("customers");
 
 				$loginData = array(
 					"branchID" 	=> $this->input->post('branchID'),
@@ -78,14 +82,14 @@ class Customer extends CI_Controller {
 
 				$loginID = $this->logintable->setLogin($loginData);
 
-				$employeData = array(
-					"isAdmin" 		=> $this->input->post('isAdmin'),
+				$customerData = array(
 					"loginID" 		=> $loginID,
 					"branchID" 		=> $this->input->post('branchID'),
+					"committeeID" 	=> $this->input->post("committee"),
 					"name" 			=> $this->input->post('name'),
 					"fatherName" 	=> $this->input->post('fatherName'),
 					"motherName" 	=> $this->input->post('motherName'),
-					"dob" 			=> $this->input->post('dob'),
+					"dob" 			=> date('Y-m-d', strtotime($this->input->post('dob'))),
 					"gender" 		=> $this->input->post('gender'),
 					"category" 		=> $this->input->post('category'),
 					"qualification" => $this->input->post('qualification'),
@@ -98,28 +102,110 @@ class Customer extends CI_Controller {
 					"phone" 		=> $this->input->post('phone'),
 					"mobile" 		=> $this->input->post('mobile'),
 					"email" 		=> $this->input->post('email'),
-					"aadharNo" 		=> $this->input->post('aadharNo'),
-					"image" 		=> $this->input->post('image'),
-					"signature" 	=> $this->input->post('signature'),
-					"idProof" 		=> $this->input->post('idProof')
+					"idProof" 		=> $this->input->post('idProof'),
+					"adhaarNo" 		=> $this->input->post('aadharNo')
 				);
+				$customerID = $this->customers->setCustomer($customerData);
 
-				if ($this->employe->setEmploye($employeData)):
-			        redirect(base_url().'employes.html');
-				else :
-			        redirect(base_url().'employes/false');
+				$this->load->library('upload');
+				$config['upload_path'] = realpath(APPPATH . '../assets/images/customer');
+				// $config['allowed_types'] = 'gif|jpg|jpeg|png';
+				$config['max_size'] = '1024';
+				$config['file_name'] = "IMG".$customerID;
+				$this->upload->initialize($config);
+				if ( !$this->upload->do_upload('image',FALSE)) {
+					$this->form_validation->set_message('image', $data['error'] = $this->upload->display_errors());
+				}
+
+				$config['file_name'] = "SIG".$customerID;
+				$this->upload->initialize($config);
+				if ( !$this->upload->do_upload('signature',FALSE)) {
+					$this->form_validation->set_message('signature', $data['error'] = $this->upload->display_errors());
+				}
+
+				$config['file_name'] = "PROOF".$customerID;
+				$this->upload->initialize($config);
+				if ( !$this->upload->do_upload('idProof',FALSE)) {
+					$this->form_validation->set_message('idProof', $data['error'] = $this->upload->display_errors());
+				}
+
+				/**
+				 * This form validation is for check image successful upload or not.
+				 */
+				if ($this->form_validation->run() == FALSE):
+
+					$this->load->model("branch");
+					$branch = $this->branch->getBranch();
+
+					$this->load->model("investmentPlans");
+					$plans = $this->investmentPlans->getPlans();
+
+					$data['category'] = ['GEN','OBC','SC','ST','OTHER'];
+					$data['gender'] 	= ['MALE','FEMALE','OTHER'];
+					$data['isAdmin'] 	= array("NO" => 0, "YES" => 1);
+					$data['branch']		= $branch;
+					$data['plans']		= $plans;
+					$data['title'] 		= 'New Customer';
+					$data['body'] 		= 'customer/newCustomer';
+					$this->load->view('layout',$data);
+
+				else:
+					$dataImage = array(
+						"image"		=> "IMG".$customerID.'.'.substr(strrchr($_FILES['image']['name'],'.'),1),
+						"signature"	=> "SIG".$customerID.'.'.substr(strrchr($_FILES['signature']['name'],'.'),1),
+						"idProof"	=> "PROOF".$customerID.'.'.substr(strrchr($_FILES['idProof']['name'],'.'),1)
+					);
+					$this->customers->updateCustomer($customerID, $dataImage);
+
+					$investmentData = array(
+						"customerID"	=> $customerID,
+						"branchID"		=> $this->input->post("branchID"),
+						"committeeID"	=> $this->input->post("committee"),
+						"planID"		=> $this->input->post("planID"),
+						"durationYear"	=> $this->input->post("duration"),
+						"durationMonth"	=> ($this->input->post("duration") * 12)
+					);
+					$planID = $this->input->post('planID');
+
+					if($planID == 1):
+						$investmentData["oneTimeInvestment"]= $this->input->post("investAmount-fd");
+						$investmentData["meturity"] 		= $this->input->post("meturtyAmount-fd");
+						$investmentData["appliedIntrest"] 	= $this->input->post("appliedInterest-fd");
+					elseif($planID == 2):
+						$investmentData["monthlyInvestment"] = $this->input->post("monthInvestAmount-rd");
+					    $investmentData["totalInvestment"] = $this->input->post("investAmount-rd");
+					    $investmentData["meturity"] = $this->input->post("meturtyAmount-rd"); 
+					    $investmentData["appliedIntrest"] = $this->input->post("appliedInterest-rd"); 
+					elseif($planID == 3):
+						$investmentData["pensionAmount"] = $this->input->post("planAMount-nps");
+						$investmentData["totalInvestment"] = $this->input->post("totalAmount-nps");
+						$investmentData["meturity"] = $this->input->post("meturtyAmount-nps");
+						$investmentData["investerAge"] = $this->input->post("investorAge-nps");
+						$investmentData["appliedIntrest"] = $this->input->post("appliedInterest-nps");
+						$investmentData["monthlyInvestment"] = $this->input->post("monthAmount-nps");
+					elseif($planID == 4):
+						$investmentData["oneTimeInvestment"] = $this->input->post("investAmount-mip");
+						$investmentData["monthlyReturn"] = $this->input->post("monthlyReturn-mip");
+						$investmentData["meturity"] = $this->input->post("meturityAmount-mip");
+						$investmentData["appliedIntrest"] = $this->input->post("appliedInterest-mip");
+					endif;
+
+					$this->load->model("investmentDetail");
+					if ($this->investmentDetail->setDetail($investmentData)):
+				        redirect(base_url().'customers.html');
+					else :
+				        redirect(base_url().'customers/false');
+					endif;
 				endif;
-
-
 		    endif;
 		}
 	}
 
-	public function employes() {
-		$this->load->model("employe");
-		$data['employes'] = $this->employe->getAllEmployee();
-		$data['title'] = 'All Employee';
-		$data['body'] = 'employee/employes';
+	public function customers() {
+		$this->load->model("customers");
+		$data['employes'] = $this->customers->getAllCustomers();
+		$data['title'] = 'All Customers';
+		$data['body'] = 'customer/customers';
 		$this->load->view('layout',$data);
 	}
 
