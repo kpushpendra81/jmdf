@@ -27,6 +27,17 @@ class InvestmentDetail extends CI_Model {
 		endif;
 	}
 
+
+	function getPlanCustomerID($customerID) {
+		$this->db->where("customerID", $customerID);
+		$result = $this->db->get('investmentDetail');
+		
+		/**
+		 * 	return login table Data getting from database according that username.
+		 */
+		return $result->row();
+	}
+
 	function employebybranch($branchID) {
 		$this->db->where('branchID', $branchID);
 		$result = $this->db->get('employee');

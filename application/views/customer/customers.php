@@ -49,7 +49,7 @@
                             <td><?= $value->email; ?></td>
                             <td><?= $value->adhaarNo; ?></td>
                             <td><?= date("d-M-Y (H:i:s A)", strtotime($value->created)); ?></td>
-                            <td><a class="btn btn-primary" href="<?= base_url() ?>customer/<?= $value->id ?>.html">Detail</a></td>
+                            <td><a class="btn btn-primary" href="<?= base_url() ?>customer/<?= $value->id ?>">Detail</a></td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>

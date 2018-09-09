@@ -209,4 +209,36 @@ class Customer extends CI_Controller {
 		$this->load->view('layout',$data);
 	}
 
+	public function customerdetail() {
+		$customerID = $this->uri->segment(2);
+		$this->load->model('customers');
+		$customer = $this->customers->getCustomer($customerID);
+
+		$this->load->model("investmentDetail");
+		$investmentPlanDetail = $this->investmentDetail->getPlanCustomerID($customerID);
+
+		$this->load->model("investmentPlans");
+		$planDetail = $this->investmentPlans->getPlan($investmentPlanDetail->planID);
+
+		$this->load->model("branch");
+		$branchDetail = $this->branch->getBranchID($customer->branchID);
+
+		$this->load->model("commitee");
+		$commiteeDetail = $this->commitee->getCommittee($customer->committeeID);
+
+		$this->load->model("auth/logintable");
+		$loginDetail = $this->logintable->getLogin($customer->loginID);
+
+
+
+		$data['customer'] = $customer;
+		$data['planDetail'] = $planDetail;
+		$data['commiteeDetail'] = $commiteeDetail;
+		$data['loginDetail'] = $loginDetail;
+		$data['branchDetail'] = $branchDetail;
+		$data['title'] = 'Customer :: '.$customer->name;
+		$data['body'] = 'customer/customer';
+		$this->load->view('layout',$data);
+	}
+
 }

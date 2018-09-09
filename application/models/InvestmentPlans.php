@@ -28,6 +28,7 @@ class InvestmentPlans extends CI_Model {
 		return $result->row();
 	}
 
+
 	function getPlanDetail($tableName) {
 		
 		$result = $this->db->get($tableName);
@@ -45,6 +46,5 @@ class InvestmentPlans extends CI_Model {
 			return false;
 		endif;
 	}
-
 
 }

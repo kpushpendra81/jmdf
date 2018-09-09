@@ -17,6 +17,16 @@ class Branch extends CI_Model {
 		return $result->result();
 	}
 
+	function getBranchID($id) {
+		$this->db->where('id', $id);
+		$result = $this->db->get('branch');
+		
+		/**
+		 * 	return login table Data getting from database according that username.
+		 */
+		return $result->row();
+	}
+
 	function setBranch($data) {
 		if($this->db->insert('branch', $data)):
 			return true;

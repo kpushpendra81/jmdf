@@ -23,6 +23,18 @@ class Logintable extends CI_Model {
 		return $result->result();
 	}
 
+	function getLogin($id) {
+		
+		// $this->db->select('password');
+		$this->db->where('id', $id);
+		$result = $this->db->get('login');
+		
+		/**
+		 * 	return login table Data getting from database according that username.
+		 */
+		return $result->row();
+	}
+
 	function setLogin($loginData) {
 		
 		if($this->db->insert('login', $loginData)):

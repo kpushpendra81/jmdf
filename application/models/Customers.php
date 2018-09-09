@@ -36,4 +36,5 @@ class Customers extends CI_Model {
 			return false;
 		endif;
 	}
+	
 }

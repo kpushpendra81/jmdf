@@ -29,6 +29,11 @@ class plans extends CI_Controller {
 
 		echo json_encode($response);
 	}
+
+	public function getPlan($planID) {
+		$this->db->where("id", $planID);
+		return $this->db->get("investmentPlans")->row();
+	}
 }
 
 ?>

@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Premium extends CI_Controller {
 
 	public function deposit() {
-		$data['body'] = 'home/dashboard';
+		$data['body'] = 'premium/deposit';
+		$data['title'] = 'Premium Deposit';
 		$this->load->view('layout',$data);
 	}
 
@@ -12,6 +13,7 @@ class Premium extends CI_Controller {
 		log_message('debug', 'sql query fail in... ', false);
 		$this->load->view('login/forget');
 	}
+
 
 
 }

@@ -74,6 +74,10 @@ $route['employebybranch'] = '/employee/employebybranch';
 
 $route['customers'] = '/customer/customers';
 $route['newcustomer'] = '/customer/newcustomer';
+$route['customer/:num'] = '/customer/customerdetail/$id';
+
+$route['deposit'] = '/premium/deposit';
+
 
 
 
