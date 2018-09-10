@@ -55,7 +55,7 @@ $route['404_override'] = '';
 
 $route['dashboard'] = '/home/index';
 
-
+/* --------------- SETTINGS ------------------------- */
 $route['branches'] = '/settings/branches';
 $route['committees'] = '/settings/committees';
 $route['newcommittee'] = '/settings/newcommittee';
@@ -65,18 +65,20 @@ $route['financial'] = '/settings/financial';
 $route['rank'] = '/settings/rank';
 $route['role'] = '/settings/role';
 
-$route['plans'] = 'plans/getplans';
-
-
+/* --------------- EMPLOYEE ------------------------- */
 $route['employes'] = '/employee/employes';
 $route['newemploye'] = '/employee/newemploye';
 $route['employebybranch'] = '/employee/employebybranch';
 
+/* --------------- CUSTOMER ------------------------- */
 $route['customers'] = '/customer/customers';
 $route['newcustomer'] = '/customer/newcustomer';
 $route['customer/:num'] = '/customer/customerdetail/$id';
 
-$route['deposit'] = '/premium/deposit';
+/* --------------- PLAN ------------------------- */
+$route['plans'] = 'plans/getplans';
+$route['premiumdetail'] = '/premium/detail';
+$route['premiumlist'] = '/premium/list';
 
 
 

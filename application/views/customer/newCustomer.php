@@ -371,7 +371,7 @@
 	              <div class="form-group gutter-xs">
 	                <label class="col-sm-2 control-label" for="form-control-1">&nbsp;</label>
 	                <div class="col-sm-4 center">
-	                  <input type="submit" value="Save Branch" class="btn btn-primary">
+	                  <input type="submit" value="Save Customer Detail" class="btn btn-primary">
 	                </div>
 	              </div>
 

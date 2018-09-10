@@ -260,8 +260,8 @@
                   </a>
                   <ul class="sidenav level-2 collapse">
                     <li class="sidenav-heading">Premium</li>
-                    <li><a href="<?= base_url() ?>deposit.html">Deposit</a></li>
-                    <li><a href="<?= base_url() ?>history.html">History</a></li>
+                    <li><a href="<?= base_url() ?>premiumdetail.html">Premium Detail</a></li>
+                    <li><a href="<?= base_url() ?>premiumlist.html">Premium list</a></li>
                   </ul>
                 </li>
                 <li class="sidenav-item has-subnav">
