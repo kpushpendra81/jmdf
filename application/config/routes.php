@@ -78,7 +78,7 @@ $route['customer/:num'] = '/customer/customerdetail/$id';
 /* --------------- PLAN ------------------------- */
 $route['plans'] = 'plans/getplans';
 $route['premiumdetail'] = '/premium/detail';
-$route['premiumlist'] = '/premium/list';
+$route['premiumlist'] = '/premium/premiumlist';
 
 
 

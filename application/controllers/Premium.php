@@ -9,7 +9,7 @@ class Premium extends CI_Controller {
 		$this->load->view('layout',$data);
 	}
 
-	public function list() {
+	public function premiumlist() {
 		log_message('debug', 'sql query fail in... ', false);
 		$this->load->view('login/forget');
 	}
