@@ -19,6 +19,18 @@
 	          <div class="demo-form-wrapper">
 	            <form id="demo-inputmask" class="form form-horizontal" method="post" enctype="multipart/form-data">
 
+	               <div class="form-group">
+	                <label class="col-sm-2 control-label" for="form-control-1">Customer ID</label>
+	                <div class="col-sm-2"><?=  date("ymd", strtotime($customer->created)).'C'.$customer->id; ?></div>
+
+	                <label class="col-sm-2 control-label" for="form-control-2">Policy No</label>
+	                <div class="col-sm-2"><?= date("ymd", strtotime($investDetail->created)).'P'.$investDetail->id; ?></div>
+
+	                <label class="col-sm-2 control-label" for="form-control-3">Username</label>
+	                <div class="col-sm-2"><?= $loginDetail->username;; ?></div>
+	              </div>
+
+
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-1">Name</label>
 	                <div class="col-sm-2"><?= $customer->name; ?></div>
@@ -93,16 +105,8 @@
 	                <label class="col-sm-2 control-label" for="form-control-22">Plan Name</label>
 	                <div class="col-sm-2"><?= $planDetail->title; ?></div>
 
-	                <label class="col-sm-2 control-label" for="form-control-37">Premium ID</label>
-	                <div class="col-sm-2">
-	                	<?= 123123 ?>
-	                	<?= 234242 ?>
-	                	<?= 234234 ?>
-	                	<?= 4234 ?>
-	                </div>
-
-	                <label class="col-sm-2 control-label" for="form-control-37">Username</label>
-	                <div class="col-sm-2"><?= $loginDetail->username; ?></div>
+	                <label class="col-sm-2 control-label" for="form-control-37">Join Date</label>
+	                <div class="col-sm-2"><?= date("d M Y", strtotime($investDetail->created)); ?></div>
 
 	              </div>
 

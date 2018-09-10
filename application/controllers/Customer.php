@@ -37,14 +37,12 @@ class Customer extends CI_Controller {
 			$this->form_validation->set_rules('state', 'State', 'required');
 			$this->form_validation->set_rules('pin', 'Pin Code', 'required|min_length[6]|max_length[6]');
 			$this->form_validation->set_rules('country', 'Country', 'required');
-			$this->form_validation->set_rules('phone', 'Phone', 'required|min_length[6]|max_length[10]');
 			$this->form_validation->set_rules('mobile', 'Mobile', 'required|min_length[10]|max_length[10]');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('aadharNo', 'Aadhar Number', 'required');
 			$this->form_validation->set_rules('image', 'File', 'trim|xss_clean');
 			$this->form_validation->set_rules('signature', 'File', 'trim|xss_clean');
 			$this->form_validation->set_rules('idProof', 'File', 'trim|xss_clean');
-
 			$this->form_validation->set_rules('branchID', 'branchID', 'required');
 			$this->form_validation->set_rules('committee', 'committee', 'required');
 			$this->form_validation->set_rules('username', 'username', 'required');
@@ -111,22 +109,38 @@ class Customer extends CI_Controller {
 				$config['upload_path'] = realpath(APPPATH . '../assets/images/customer');
 				// $config['allowed_types'] = 'gif|jpg|jpeg|png';
 				$config['max_size'] = '1024';
-				$config['file_name'] = "IMG".$customerID;
+				$config['allowed_types']  = 'gif|jpg|png';
+				$config['file_name'] = "IMG".$customerID.'.'.substr(strrchr($_FILES['image']['name'],'.'),1);
+				$image = $config['file_name'];
 				$this->upload->initialize($config);
 				if ( !$this->upload->do_upload('image',FALSE)) {
 					$this->form_validation->set_message('image', $data['error'] = $this->upload->display_errors());
+					if($data['error']):
+						echo $data['error'];
+						die();
+					endif;
 				}
 
-				$config['file_name'] = "SIG".$customerID;
+				$config['file_name'] = "SIG".$customerID.'.'.substr(strrchr($_FILES['signature']['name'],'.'),1);
+				$siganture = $config['file_name'];
 				$this->upload->initialize($config);
 				if ( !$this->upload->do_upload('signature',FALSE)) {
 					$this->form_validation->set_message('signature', $data['error'] = $this->upload->display_errors());
+					if($data['error']):
+						echo $data['error'];
+						die();
+					endif;
 				}
 
-				$config['file_name'] = "PROOF".$customerID;
+				$config['file_name'] = "PROOF".$customerID.'.'.substr(strrchr($_FILES['idProof']['name'],'.'),1);
+				$idProof = $config['file_name'];
 				$this->upload->initialize($config);
 				if ( !$this->upload->do_upload('idProof',FALSE)) {
 					$this->form_validation->set_message('idProof', $data['error'] = $this->upload->display_errors());
+					if($data['error']):
+						echo $data['error'];
+						die();
+					endif;
 				}
 
 				/**
@@ -140,7 +154,7 @@ class Customer extends CI_Controller {
 					$this->load->model("investmentPlans");
 					$plans = $this->investmentPlans->getPlans();
 
-					$data['category'] = ['GEN','OBC','SC','ST','OTHER'];
+					$data['category'] 	= ['GEN','OBC','SC','ST','OTHER'];
 					$data['gender'] 	= ['MALE','FEMALE','OTHER'];
 					$data['isAdmin'] 	= array("NO" => 0, "YES" => 1);
 					$data['branch']		= $branch;
@@ -151,9 +165,9 @@ class Customer extends CI_Controller {
 
 				else:
 					$dataImage = array(
-						"image"		=> "IMG".$customerID.'.'.substr(strrchr($_FILES['image']['name'],'.'),1),
-						"signature"	=> "SIG".$customerID.'.'.substr(strrchr($_FILES['signature']['name'],'.'),1),
-						"idProof"	=> "PROOF".$customerID.'.'.substr(strrchr($_FILES['idProof']['name'],'.'),1)
+						"image"		=> $image,
+						"signature"	=> $siganture,
+						"idProof"	=> $idProof
 					);
 					$this->customers->updateCustomer($customerID, $dataImage);
 
@@ -236,6 +250,7 @@ class Customer extends CI_Controller {
 		$data['commiteeDetail'] = $commiteeDetail;
 		$data['loginDetail'] = $loginDetail;
 		$data['branchDetail'] = $branchDetail;
+		$data['investDetail'] = $investmentPlanDetail;
 		$data['title'] = 'Customer :: '.$customer->name;
 		$data['body'] = 'customer/customer';
 		$this->load->view('layout',$data);
