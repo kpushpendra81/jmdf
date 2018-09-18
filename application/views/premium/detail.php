@@ -89,6 +89,7 @@
                     <th class="text-center">monthlyInvestment</th>
                     <th class="text-center">totalInvestment</th>
                     <th class="text-center">Pension</th>
+                    <th class="text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="PolicyList"></tbody>
@@ -140,6 +141,15 @@
 	                    <td class="text-center">${val.monthlyInvestment ? '&#8377; ' + val.monthlyInvestment : 'N/A'}</td>
 	                    <td class="text-center">${val.totalInvestment ? '&#8377; ' + val.totalInvestment : 'N/A'}</td>
 	                    <td class="text-center">${val.pensionAmount ? '&#8377; ' + val.pensionAmount : 'N/A'}</td>
+	                    <td>
+	                    	<a href="<?= base_url() ?>printcertificate/${val.id}.html" target="__blank" class="btn btn-primary">
+	                    		<span class="icon icon-print icon-lg"></span>
+	                    	</a>
+	                    	&emsp;
+	                    	<a href="" class="btn btn-primary">
+	                    		<span class="icon icon-wpforms icon-lg"></span>
+	                    	</a>
+	                    </td>
 						        </tr>`
 					}).join()
 					$('#PolicyList').html(list)

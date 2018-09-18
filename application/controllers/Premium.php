@@ -48,6 +48,10 @@ class Premium extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function printcertificate() {
+		$this->load->view('premium/printcertificate');
+	}
+
 
 
 }
