@@ -5,7 +5,7 @@
 	<style type="text/css">
 		body {
 			font-family: arial;
-
+			font-size: 13px;
 		}
 		@font-face {
 		font-family: 'AlgerianRegular';
@@ -91,79 +91,80 @@
 							</tr>
 							<tr>
 								<td>
-									Branch Name
+									Branch Name: <?= $result->branchTitle; ?>
 								</td>
 								<td>
-									Folio No.
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Policy No.
-								</td>
-								<td>
-									SchemeID/Plan Mode
+									Folio No.: <?=  $result->title; ?>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									Name of Depositor
+									Policy No.: <?=  date("ymd", strtotime($result->created)).'P'.$policyID; ?>
 								</td>
 								<td>
-									Member Code
+									SchemeID/Plan Mode: <?= $result->branchTitle; ?>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									Second Applicant Name
+									Name of Depositor: <?= $result->name; ?>
 								</td>
 								<td>
-									Associate Code
+									Member Code: <?=  date("ymd", strtotime($result->created)).'C'.$result->id; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Second Applicant Name: <?= $result->motherName; ?>
+								</td>
+								<td>
+									Associate Code: <?= $result->branchTitle; ?>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									Address: 
+									Address: <?= $result->address; ?> <?= $result->city; ?> <?= $result->state; ?> <?= $result->pin; ?>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									Installment Amount: 
+									Installment Amount: <?= $result->oneTimeInvestment; ?>
 								</td>
 								<td>
-									In Words
-								</td>
-							</tr>
-							<tr>
-								<td>
-									DOC
-								</td>
-								<td>
-									Term
+									In Words: <?= $result->oneTimeInvestment; ?>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									Expiry Date
+									DOC: <?= $result->created; ?>
 								</td>
 								<td>
-									Nominee Name
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Estimated Realizable Value
-								</td>
-								<td>
-									Relation Age:
+									Term: <?= $result->durationMonth; ?> Months
 								</td>
 							</tr>
 							<tr>
 								<td>
-									In Words
+									<?php $created = $result->durationMonth ?>
+									Expiry Date: <?= date('Y-m-d', strtotime("+$created months", strtotime($result->created))); ?>
 								</td>
 								<td>
-									Print Date
+									Nominee Name: <?= $result->motherName; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Estimated Realizable Value: <?= $result->meturity; ?>
+								</td>
+								<td>
+									Relation: <?= "Mother" ?> Age: <?= $result->investerAge; ?>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									In Words: <?= $result->meturity; ?>
+								</td>
+								<td>
+									Print Date: <?=  date("d-M-Y", strtotime($result->created)); ?>
 								</td>
 							</tr>
 							<tr>
@@ -196,5 +197,8 @@
 			</div>
 		</div>
 	</div>
+	<pre>
+		<?php // print_r($result); ?>
+	</pre>
 </body>
 </html>

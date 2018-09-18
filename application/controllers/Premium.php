@@ -49,7 +49,17 @@ class Premium extends CI_Controller {
 	}
 
 	public function printcertificate() {
-		$this->load->view('premium/printcertificate');
+		$policyID = $this->uri->segment(2);
+		
+		$this->load->model("investmentDetail");
+		$investmentDetail = $this->investmentDetail->getPlanID($policyID);
+
+		$data = array(
+			"result" => $investmentDetail,
+			"policyID" => $policyID
+		);
+
+		$this->load->view('premium/printcertificate', $data);
 	}
 
 
