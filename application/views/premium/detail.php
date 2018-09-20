@@ -146,7 +146,7 @@
 	                    		<span class="icon icon-print icon-lg"></span>
 	                    	</a>
 	                    	&emsp;
-	                    	<a href="" class="btn btn-primary">
+	                    	<a href="<?= base_url() ?>policydetail/${val.id}.html" class="btn btn-primary">
 	                    		<span class="icon icon-wpforms icon-lg"></span>
 	                    	</a>
 	                    </td>

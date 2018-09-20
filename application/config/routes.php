@@ -80,6 +80,7 @@ $route['plans'] = 'plans/getplans';
 $route['premiumdetail'] = '/premium/detail';
 $route['premiumlist'] = '/premium/premiumlist';
 $route['printcertificate/:num'] = '/premium/printcertificate/$id';
+$route['policydetail/:num'] = '/premium/policydetail/$id';
 
 
 
