@@ -66,7 +66,19 @@ class Premium extends CI_Controller {
 		$policyID = $this->uri->segment(2);
 
 		$this->load->model("investmentDetail");
-		$this->investmentDetail->getPlan($policyID);
+		$planDetail = $this->investmentDetail->getPlanDetailByID($policyID);
+		
+		// echo '<pre>';
+		// print_r($planDetail);
+		// echo '</pre>';
+
+		$data = array(
+			'planDetail' => $planDetail, 
+			"policyID" => $policyID,
+			'body' => 'premium/policyDetail',
+			'title' => 'Policy Detail'
+		);
+		$this->load->view('layout',$data);
 	}
 
 }

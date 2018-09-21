@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/elephant.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/application.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/demo.min.css">
+    <script src="<?= base_url(); ?>assets/js/custom.js"></script>
   </head>
   <body class="layout layout-header-fixed layout-footer-fixed">
     <div class="layout-header">

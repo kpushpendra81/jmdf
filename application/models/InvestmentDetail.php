@@ -45,7 +45,7 @@ class InvestmentDetail extends CI_Model {
 		return $result->result();
 	}
 
-	function getPlanID($policyID) {
+	function getPlanDetailByID($policyID) {
 		$queryString = "SELECT ID.*, customer.*, IP.title, branch.title AS branchTitle, committee.title AS committeeTitle  FROM investmentDetail ID LEFT JOIN investmentPlans IP ON ID.planID = IP.id LEFT JOIN branch ON ID.branchID = branch.id LEFT JOIN committee ON ID.committeeID = committee.id LEFT JOIN customer ON ID.customerID = customer.id WHERE ID.id = $policyID";
 		$result = $this->db->query($queryString);
 		

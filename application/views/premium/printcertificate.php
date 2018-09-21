@@ -67,6 +67,7 @@
 			color: #b81e75;
 		}
 	</style>
+	<script src="<?= base_url(); ?>assets/js/custom.js"></script>
 </head>
 <body>
 	<div class="border-1">
@@ -131,12 +132,12 @@
 									Installment Amount: <?= $result->oneTimeInvestment; ?>
 								</td>
 								<td>
-									In Words: <?= $result->oneTimeInvestment; ?>
+									In Words: <script>document.write(convert_number(<?= $result->oneTimeInvestment; ?>))</script>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									DOC: <?= $result->created; ?>
+									DOC: <?=  date("d-M-Y", strtotime($result->created)); ?>
 								</td>
 								<td>
 									Term: <?= $result->durationMonth; ?> Months
@@ -161,10 +162,10 @@
 							</tr>
 							<tr>
 								<td>
-									In Words: <?= $result->meturity; ?>
+									In Words: <script>document.write(convert_number(<?= $result->meturity; ?>))</script>
 								</td>
 								<td>
-									Print Date: <?=  date("d-M-Y", strtotime($result->created)); ?>
+									Print Date: <?=  date("d-M-Y"); ?>
 								</td>
 							</tr>
 							<tr>
@@ -200,5 +201,6 @@
 	<pre>
 		<?php // print_r($result); ?>
 	</pre>
+	
 </body>
 </html>
