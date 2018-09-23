@@ -48,6 +48,20 @@ class Premium extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function premiumlistall() {
+
+		$this->load->model("investmentDetail");
+		$investmentDetail = $this->investmentDetail->getPlanAll();
+
+		$data = array(
+			'body' => 'premium/policyListAll',
+			'title' => 'Policy List',
+			"planDetails" => $investmentDetail
+		);
+
+		$this->load->view('layout',$data);
+	}
+
 	public function printcertificate() {
 		$policyID = $this->uri->segment(2);
 		
@@ -93,6 +107,20 @@ class Premium extends CI_Controller {
 			'title' => 'Policy Detail'
 		);
 		$this->load->view('premium/printSlip',$data);
+	}
+
+	public function collectpremium() {
+		$policyID = $this->uri->segment(2);
+		
+		$this->load->model("investmentDetail");
+		$investmentDetail = $this->investmentDetail->getPlanDetailByID($policyID);
+
+		$data = array(
+			"result" => $investmentDetail,
+			"policyID" => $policyID
+		);
+
+		$this->load->view('premium/printcertificate', $data);
 	}
 
 }

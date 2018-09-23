@@ -79,8 +79,11 @@ $route['customer/:num'] = '/customer/customerdetail/$id';
 $route['plans'] = 'plans/getplans';
 $route['premiumdetail'] = '/premium/detail';
 $route['premiumlist'] = '/premium/premiumlist';
+$route['premiumlistall'] = '/premium/premiumlistall';
 $route['printcertificate/:num'] = '/premium/printcertificate/$id';
 $route['policydetail/:num'] = '/premium/policydetail/$id';
+$route['printslip/:num'] = '/premium/printslip/$id';
+$route['collectpremium/:num'] = '/premium/collectpremium/$id';
 
 
 

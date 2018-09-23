@@ -71,7 +71,7 @@
                   </tr>
               </table>
 
-              <iframe src="<?php echo base_url(); ?>printSlip/<?php echo $studentId; ?>.html" width="100%" height="250px" id="iframe1" style="border: 0px;" onLoad="autoResize('iframe1');"></iframe>
+              <iframe src="<?php echo base_url(); ?>printslip/<?= $policyID; ?>.html" width="100%" height="550px" id="iframe1" style="border: 0px;" onLoad="autoResize('iframe1');"></iframe>
 
             </div>
           </div>
