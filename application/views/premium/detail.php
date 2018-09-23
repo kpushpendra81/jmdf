@@ -22,7 +22,7 @@
 					<div class="col-sm-2">
 						<input id="CustomerID" class="form-control" type="text" required="required">
 					</div>
-					<button class="btn btn-primary col-sm-1" onclick="getPlanList()">Get Plan Detail</button>
+					<button class="btn btn-primary col-sm-2" onclick="getPlanList()">Get Plan Detail</button>
 				  </div>
 			  </div>
 			</div>
@@ -77,18 +77,11 @@
                 <thead>
                   <tr>
                     <th class="text-left">Policy ID</th>
-                    <th class="text-right">Title</th>
-                    <th class="text-right">Branch</th>
-                    <th class="text-right">Committee</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Branch</th>
+                    <th class="text-center">Committee</th>
                     <th class="text-center">Year</th>
                     <th class="text-center">Month</th>
-                    <th class="text-center">oneTimeInvestment</th>
-                    <th class="text-center">meturity</th>
-                    <th class="text-center">Intrest</th>
-                    <th class="text-center">monthlyReturn</th>
-                    <th class="text-center">monthlyInvestment</th>
-                    <th class="text-center">totalInvestment</th>
-                    <th class="text-center">Pension</th>
                     <th class="text-center">Actions</th>
                   </tr>
                 </thead>
@@ -134,13 +127,6 @@
 	                    <td class="text-center">${val.committeeTitle}</td>
 	                    <td class="text-center">${val.durationYear ? val.durationYear : 'N/A'}</td>
 	                    <td class="text-center">${val.durationMonth ? val.durationMonth : 'N/A'}</td>
-	                    <td class="text-center">${val.oneTimeInvestment ? '&#8377; ' + val.oneTimeInvestment : 'N/A'}</td>
-	                    <td class="text-center">${val.meturity ? '&#8377; ' + val.meturity : 'N/A'}</td>
-	                    <td class="text-center">${val.appliedIntrest ? val.appliedIntrest + '%' : 'N/A'}</td>
-	                    <td class="text-center">${val.monthlyReturn ? '&#8377; ' + val.monthlyReturn : 'N/A'}</td>
-	                    <td class="text-center">${val.monthlyInvestment ? '&#8377; ' + val.monthlyInvestment : 'N/A'}</td>
-	                    <td class="text-center">${val.totalInvestment ? '&#8377; ' + val.totalInvestment : 'N/A'}</td>
-	                    <td class="text-center">${val.pensionAmount ? '&#8377; ' + val.pensionAmount : 'N/A'}</td>
 	                    <td>
 	                    	<a href="<?= base_url() ?>printcertificate/${val.id}.html" target="__blank" class="btn btn-primary">
 	                    		<span class="icon icon-print icon-lg"></span>

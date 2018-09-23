@@ -81,4 +81,18 @@ class Premium extends CI_Controller {
 		$this->load->view('layout',$data);
 	}
 
+	public function printslip() {
+		$policyID = $this->uri->segment(2);
+
+		$this->load->model("investmentDetail");
+		$planDetail = $this->investmentDetail->getPlanDetailByID($policyID);
+
+		$data = array(
+			'planDetail' => $planDetail, 
+			"policyID" => $policyID,
+			'title' => 'Policy Detail'
+		);
+		$this->load->view('premium/printSlip',$data);
+	}
+
 }
