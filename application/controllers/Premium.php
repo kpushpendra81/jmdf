@@ -111,16 +111,21 @@ class Premium extends CI_Controller {
 
 	public function collectpremium() {
 		$policyID = $this->uri->segment(2);
-		
+
 		$this->load->model("investmentDetail");
-		$investmentDetail = $this->investmentDetail->getPlanDetailByID($policyID);
+		$planDetail = $this->investmentDetail->getPlanDetailByID($policyID);
+		
+		// echo '<pre>';
+		// print_r($planDetail);
+		// echo '</pre>';
 
 		$data = array(
-			"result" => $investmentDetail,
-			"policyID" => $policyID
+			'planDetail' => $planDetail, 
+			"policyID" => $policyID,
+			'body' => 'premium/collectpremium',
+			'title' => 'Policy Detail'
 		);
-
-		$this->load->view('premium/printcertificate', $data);
+		$this->load->view('layout',$data);
 	}
 
 }
