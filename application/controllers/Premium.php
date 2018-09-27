@@ -115,10 +115,6 @@ class Premium extends CI_Controller {
 		$this->load->model("investmentDetail");
 		$planDetail = $this->investmentDetail->getPlanDetailByID($policyID);
 		
-		// echo '<pre>';
-		// print_r($planDetail);
-		// echo '</pre>';
-
 		$data = array(
 			'planDetail' => $planDetail, 
 			"policyID" => $policyID,
@@ -126,6 +122,14 @@ class Premium extends CI_Controller {
 			'title' => 'Policy Detail'
 		);
 		$this->load->view('layout',$data);
+	}
+
+
+
+	public function setpremium() {
+		$policyID = $this->input->post('');
+		$customerID = $this->input->post('');
+		
 	}
 
 }

@@ -84,6 +84,7 @@ $route['printcertificate/:num'] = '/premium/printcertificate/$id';
 $route['policydetail/:num'] = '/premium/policydetail/$id';
 $route['printslip/:num'] = '/premium/printslip/$id';
 $route['collectpremium/:num'] = '/premium/collectpremium/$id';
+$route['setpremium'] = '/premium/setpremium';
 
 
 
