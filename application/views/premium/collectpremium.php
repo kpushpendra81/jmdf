@@ -2,16 +2,16 @@
 	<div class="layout-content-body">
 	  <div class="row gutter-xs">
 		<div class="col-md-12" id="planDetail">
-      <div class="card">
-        <div class="card-header">
-            <div class="card-actions" style="top: 35%;">
-              <a class="btn btn-sm btn-labeled arrow-info" onclick="window.history.back();" href="#">
-                <span class="btn-label">
-                <span class="icon icon-arrow-circle-left icon-lg icon-fw"></span>
-                </span>
-                Back
-              </a>
-            </div>
+          <div class="card">
+            <div class="card-header">
+               <div class="card-actions" style="top: 35%;">
+        <a class="btn btn-sm btn-labeled arrow-info" onclick="window.history.back();" href="#">
+          <span class="btn-label">
+          <span class="icon icon-arrow-circle-left icon-lg icon-fw"></span>
+          </span>
+          Back
+        </a>
+        </div>
               <strong>Collect Premium (<?=  date("ymd", strtotime($planDetail->created)).'P'.$policyID; ?>)</strong>
             </div>
             <div class="card-body" data-toggle="match-height">
@@ -25,6 +25,8 @@
                           <?=  date("ymd", strtotime($planDetail->created)).'C'.$planDetail->id; ?>  
                           <input type="hidden" name="policyID" value="<?= $policyID ?>">
                           <input type="hidden" name="customerID" value="<?= $planDetail->id ?>">
+                         <input type="hidden" name="planID" value="<?= $planDetail->planID ?>">
+                        
                         </td>
                         <th>Premium Amount</th>
                         <td><?= $planDetail->monthlyInvestment; ?></td>
@@ -42,6 +44,7 @@
                         <td><?= $planDetail->motherName; ?></td>
                         <th>Date Of Birth</th>
                         <td>
+                          
                           <?= date("jS-M-Y", strtotime($planDetail->dob)); ?>
                         </td>
                       </tr>
@@ -72,8 +75,19 @@
                         <td>
                           <select name="premiumDate">
                             <option value="">-Select Premium Date-</option>
-                            <option value="cash">CASH</option>
-                            <option value="online">ONLINE</option>
+                            <?php 
+                           
+                            $prDate = date('Y-m-d',strtotime($planDetail->created));
+                            for($i=1;$i<$planDetail->durationMonth;$i++){
+                            $month = date("M-Y", strtotime($prDate));?>
+                            <option value="<?php echo $prDate;?>"><?= $month;?></option>
+                           <?php 
+                           $prDate = date('Y-m-d', strtotime($prDate. ' + 1 month'));
+                           
+                            }?>
+                           
+                          
+                           
                           </select>
                         </td>
                       </tr>
