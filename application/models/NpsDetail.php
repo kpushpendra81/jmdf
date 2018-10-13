@@ -9,7 +9,7 @@ class NpsDetail extends CI_Model {
 
 	function getDetail($policyID) {
 		$this->db->where('policyID', $policyID);
-		$result = $this->db->get('npsDetail');
+		$result = $this->db->get('npsdetail');
 		return $result->result();
 	}
 }
