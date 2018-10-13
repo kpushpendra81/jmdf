@@ -127,8 +127,44 @@ class Premium extends CI_Controller {
 
 
 	public function setpremium() {
-		$policyID = $this->input->post('');
-		$customerID = $this->input->post('');
+		$planID = $this->input->post('planID');
+		$policyID = $this->input->post('policyID');
+		$customerID = $this->input->post('customerID');
+		$dipositorName = $this->input->post('dipositorName');
+		$payMode = $this->input->post('payMode');
+		$remark = $this->input->post('remark');
+		$premiumDate = $this->input->post('premiumDate');
+		$joinerID = $this->input->post('joinerID');
+		$lateFee = $this->input->post('lateFee');
+		$totalAmount = $this->input->post('totalAmount');
+		$committee = $this->input->post('committee');
+		$data=array(
+				"customerID"	=>	$customerID,
+				"policyID"		=>	$policyID,
+				"premiumAmount"	=>	$totalAmount,
+				"balancePremium"=>			0,
+				"updated"			=>date("y-m-d"),
+				"created"		=>	date("y-m-d"),
+				"depositorName"	=>	$dipositorName,
+				"payMode"		=>	$payMode,
+				"lateFee"		=>	$lateFee,
+				"remark"		=>	$remark
+				
+		);
+		
+		if($planID==1){
+			$this->db->insert("fddetail",$data);
+		}
+		if($planID==2){
+			$this->db->insert("rddetail",$data);
+		}
+		if($planID==3){
+			$this->db->insert("npsdetail",$data);
+		}
+		if($planID==4){
+			$this->db->insert("misdetail",$data);
+		}
+		
 		
 	}
 
