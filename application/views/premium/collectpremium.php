@@ -2,16 +2,16 @@
 	<div class="layout-content-body">
 	  <div class="row gutter-xs">
 		<div class="col-md-12" id="planDetail">
-          <div class="card">
-            <div class="card-header">
-               <div class="card-actions" style="top: 35%;">
-        <a class="btn btn-sm btn-labeled arrow-info" onclick="window.history.back();" href="#">
-          <span class="btn-label">
-          <span class="icon icon-arrow-circle-left icon-lg icon-fw"></span>
-          </span>
-          Back
-        </a>
-        </div>
+      <div class="card">
+        <div class="card-header">
+            <div class="card-actions" style="top: 35%;">
+              <a class="btn btn-sm btn-labeled arrow-info" onclick="window.history.back();" href="#">
+                <span class="btn-label">
+                <span class="icon icon-arrow-circle-left icon-lg icon-fw"></span>
+                </span>
+                Back
+              </a>
+            </div>
               <strong>Collect Premium (<?=  date("ymd", strtotime($planDetail->created)).'P'.$policyID; ?>)</strong>
             </div>
             <div class="card-body" data-toggle="match-height">
@@ -42,7 +42,6 @@
                         <td><?= $planDetail->motherName; ?></td>
                         <th>Date Of Birth</th>
                         <td>
-                          
                           <?= date("jS-M-Y", strtotime($planDetail->dob)); ?>
                         </td>
                       </tr>
