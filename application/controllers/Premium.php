@@ -81,14 +81,26 @@ class Premium extends CI_Controller {
 
 		$this->load->model("investmentDetail");
 		$planDetail = $this->investmentDetail->getPlanDetailByID($policyID);
-		
-		// echo '<pre>';
-		// print_r($planDetail);
-		// echo '</pre>';
+
+		if($planDetail->planID == 2){
+			$this->load->model('rdDetail');
+			$detail = $this->rdDetail->getDetail($policyID);
+		}
+
+		if($planDetail->planID == 3){
+			$this->load->model('npsDetail');
+			$detail = $this->npsDetail->getDetail($policyID);
+		}
+
+		if($planDetail->planID == 4){
+			$this->load->model('misDetail');
+			$detail = $this->misDetail->getDetail($policyID);
+		}
 
 		$data = array(
 			'planDetail' => $planDetail, 
 			"policyID" => $policyID,
+			"detail" => $detail,
 			'body' => 'premium/policyDetail',
 			'title' => 'Policy Detail'
 		);
@@ -96,14 +108,14 @@ class Premium extends CI_Controller {
 	}
 
 	public function printslip() {
-		$policyID = $this->uri->segment(2);
+		$invoiceInfoArray = explode("_", $this->uri->segment(2));
 
 		$this->load->model("investmentDetail");
-		$planDetail = $this->investmentDetail->getPlanDetailByID($policyID);
+		$planDetail = $this->investmentDetail->getPlanDetailByID($invoiceInfoArray[1]);
 
 		$data = array(
 			'planDetail' => $planDetail, 
-			"policyID" => $policyID,
+			"policyID" => $invoiceInfoArray[1],
 			'title' => 'Policy Detail'
 		);
 		$this->load->view('premium/printSlip',$data);
@@ -124,8 +136,6 @@ class Premium extends CI_Controller {
 		$this->load->view('layout',$data);
 	}
 
-
-
 	public function setpremium() {
 		$planID = $this->input->post('planID');
 		$policyID = $this->input->post('policyID');
@@ -138,34 +148,37 @@ class Premium extends CI_Controller {
 		$lateFee = $this->input->post('lateFee');
 		$totalAmount = $this->input->post('totalAmount');
 		$committee = $this->input->post('committee');
-		$data=array(
-				"customerID"	=>	$customerID,
-				"policyID"		=>	$policyID,
-				"premiumAmount"	=>	$totalAmount,
-				"balancePremium"=>			0,
-				"updated"			=>date("y-m-d"),
-				"created"		=>	date("y-m-d"),
-				"depositorName"	=>	$dipositorName,
-				"payMode"		=>	$payMode,
-				"lateFee"		=>	$lateFee,
-				"remark"		=>	$remark
-				
+		$data = array(
+			"customerID"	=>	$customerID,
+			"policyID"		=>	$policyID,
+			"premiumAmount"	=>	explode(' ', $totalAmount)[1],
+			"balancePremium"=>	0,
+			"updated"		=> 	date("y-m-d"),
+			"created"		=>	date("y-m-d"),
+			"depositorName"	=>	$dipositorName,
+			"payMode"		=>	$payMode,
+			"lateFee"		=>	explode(' ', $lateFee)[1],
+			"remark"		=>	$remark
 		);
 		
-		if($planID==1){
+		if($planID == 1)
 			$this->db->insert("fddetail",$data);
-		}
-		if($planID==2){
+
+		if($planID == 2)
 			$this->db->insert("rddetail",$data);
-		}
-		if($planID==3){
+
+		if($planID == 3)
 			$this->db->insert("npsdetail",$data);
-		}
-		if($planID==4){
+
+		if($planID == 4)
 			$this->db->insert("misdetail",$data);
-		}
-		
-		
+
+		redirect("policydetail/$policyID", 'refresh');
+	}
+
+	public function printInvoice() {
+		$installments = $this->uri->segment('invoiceID');
+
 	}
 
 }

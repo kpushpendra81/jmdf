@@ -70,8 +70,62 @@
                     <td class="text-left"><?= $planDetail->oneTimeInvestment; ?></td>
                   </tr>
               </table>
-
-              <iframe src="<?php echo base_url(); ?>printslip/<?= $policyID; ?>.html" width="100%" height="550px" id="iframe1" style="border: 0px;" onLoad="autoResize('iframe1');"></iframe>
+            </div>
+            <div class="card-body" data-toggle="match-height">
+              <table class="table table-bordered">
+                  <tr>
+                    <th>#</th>
+                    <th>Depositor Name</th>
+                    <th>Premium No.</th>
+                    <th>Premium Amount</th>
+                    <th>Balance Premium</th>
+                    <th>Late Fee</th>
+                    <th>Pay Mode</th>
+                    <th>Remark</th>
+                    <th>Diposit Date</th>
+                    <th>Settings</th>
+                  </tr>
+                  
+                  <?php
+                    $amt = $planDetail->planID == 4 ? $planDetail->monthlyReturn : $planDetail->monthlyInvestment;
+                    echo "<tr>";
+                    echo "<td>".$planDetail->id."</td>";
+                    echo "<td>".$planDetail->name."</td>";
+                    echo "<td>1</td>";
+                    echo "<td>".$amt."</td>";
+                    echo "<td>0.00</td>";
+                    echo "<td>0.00</td>";
+                    echo "<td>CASH</td>";
+                    echo "<td>Joining Installment</td>";
+                    echo "<td>".$planDetail->created."</td>";
+                    echo "<td>
+                            <a href='".base_url()."printslip/1_".$policyID.".html' target='__blank' class='btn btn-primary'>
+                                <span class='icon icon-print icon-lg'></span>
+                            </a>
+                          </td>";
+                    echo "</tr>";
+                      
+                    foreach ($detail as $key => $value) {
+                      echo "<tr>";
+                      echo "<td>".$value->id."</td>";
+                      echo "<td>".$value->depositorName."</td>";
+                      echo "<td>".$value->id."</td>";
+                      echo "<td>".$value->premiumAmount."</td>";
+                      echo "<td>".$value->balancePremium."</td>";
+                      echo "<td>".$value->lateFee."</td>";
+                      echo "<td>".$value->payMode."</td>";
+                      echo "<td>".$value->remark."</td>";
+                      echo "<td>".$value->created."</td>";
+                      echo "<td>
+                            <a href='".base_url()."printslip/2_".$policyID."_".$value->id.".html' target='__blank' class='btn btn-primary'>
+                                <span class='icon icon-print icon-lg'></span>
+                            </a>
+                      </td>";
+                      echo "</tr>";
+                    }
+                  ?>
+                  
+              </table>
 
             </div>
           </div>

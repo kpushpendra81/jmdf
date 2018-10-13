@@ -71,6 +71,10 @@
                               <a href="<?= base_url() ?>policydetail/<?= $planDetail->policyID ?>.html" title="Premium Detail" class="btn btn-primary">
                                 <span class="icon icon-wpforms icon-lg"></span>
                               </a>
+                              &emsp;
+                              <a href="<?= base_url() ?>printcertificate/<?= $planDetail->policyID ?>.html" target="__blank" class="btn btn-primary">
+                                <span class="icon icon-print icon-lg"></span>
+                              </a>
                             <?php endif; ?>
                           </td>
                         </tr>

@@ -17,7 +17,7 @@
             <div class="card-body" data-toggle="match-height">
               <div class="row">
                 <div class="col-md-12">
-                  <form method="post" action="<?= base_url() ?>setpremium.html">
+                  <form id="demo-inputmask" method="post" action="<?= base_url() ?>setpremium.html">
                     <table class="table">
                       <tr>
                         <th>Customer-ID</th>
@@ -25,7 +25,7 @@
                           <?=  date("ymd", strtotime($planDetail->created)).'C'.$planDetail->id; ?>  
                           <input type="hidden" name="policyID" value="<?= $policyID ?>">
                           <input type="hidden" name="customerID" value="<?= $planDetail->id ?>">
-                         <input type="hidden" name="planID" value="<?= $planDetail->planID ?>">
+                          <input type="hidden" name="planID" value="<?= $planDetail->planID ?>">
                         
                         </td>
                         <th>Premium Amount</th>
@@ -60,20 +60,27 @@
                       </tr>
                       <tr>
                         <th>Depositor Name</th>
-                        <td><input type="text" name="dipositorName" /></td>
+                        <td>
+                          <div class="form-group form-group-sm">
+                              <input id="form-control-12" class="form-control" type="text" name="dipositorName" placeholder="Depositor Name">
+                          </div>
                         <th>Pay-Mode</th>
                         <td>
-                          <select name="payMode">
+                          <select class="form-control custom-select-sm" name="payMode">
                             <option value="">-Select Mode-</option>
                             <option value="cash">CASH</option>
                             <option value="online">ONLINE</option>
                           </select>
                         </td>
                         <th>Remark</th>
-                        <td><input type="text" name="remark" /></td>
+                        <td>
+                          <div class="form-group form-group-sm">
+                              <input id="form-control-12" class="form-control" type="text" name="remark" placeholder="Remark">
+                          </div>
+                        </td>
                         <th>Select Installment Month</th>
                         <td>
-                          <select name="premiumDate">
+                          <select class="form-control custom-select-sm" name="premiumDate">
                             <option value="">-Select Premium Date-</option>
                             <?php 
                            
@@ -85,21 +92,34 @@
                            $prDate = date('Y-m-d', strtotime($prDate. ' + 1 month'));
                            
                             }?>
-                           
-                          
-                           
                           </select>
                         </td>
                       </tr>
                       <tr>
                         <th>Joiner-ID</th>
-                        <td><input type="text" name="joinerID" /></td>
+                        <td>
+                          <div class="form-group form-group-sm">
+                            <input id="form-control-6" name="joinerID" class="form-control" type="text" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 0, 'digitsOptional': false, 'prefix': '', 'placeholder': ''" style="text-align: right; width:100px;">
+                          </div>
+                        </td>
                         <th>Late Fee</th>
-                        <td><input type="text" name="lateFee" /></td>
+                        <td>
+                          <div class="form-group form-group-sm">
+                            <input id="form-control-6" name="lateFee" class="form-control" type="text" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '₹ ', 'placeholder': '0'" style="text-align: right; width:100px;">
+                          </div>
+                        </td>
                         <th>Total Amount</th>
-                        <td><input type="text" name="totalAmount" /></td>
+                        <td>
+                          <div class="form-group form-group-sm">
+                            <input id="form-control-6" name="totalAmount" class="form-control" type="text" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '₹ ', 'placeholder': '0'" style="text-align: right; width:100px;">
+                          </div>
+                        </td>
                         <th>Committee</th>
-                        <td><input type="text" name="committee" value="<?=  $planDetail->committeeTitle; ?>" /></td>
+                        <td>
+                          <div class="form-group form-group-sm">
+                            <input class="form-control" type="text" name="committee" value="<?=  $planDetail->committeeTitle; ?>" />
+                          </div>
+                        </td>
                       </tr>
                       <tr>
                         <td>
