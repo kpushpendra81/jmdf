@@ -179,31 +179,45 @@ class Customer extends CI_Controller {
 						"durationYear"	=> $this->input->post("duration"),
 						"durationMonth"	=> ($this->input->post("duration") * 12)
 					);
+
+					$daybookData = array(
+						"transactionType" 	=> "credit",
+						"source" 			=> "First Premium Amount"
+					);
+
 					$planID = $this->input->post('planID');
 
 					if($planID == 1):
+						$daybookData["amount"] = $this->input->post("investAmount-fd");
 						$investmentData["oneTimeInvestment"]= $this->input->post("investAmount-fd");
 						$investmentData["meturity"] 		= $this->input->post("meturtyAmount-fd");
 						$investmentData["appliedIntrest"] 	= $this->input->post("appliedInterest-fd");
+
 					elseif($planID == 2):
+						$daybookData["amount"] = $this->input->post("monthInvestAmount-rd");
 						$investmentData["monthlyInvestment"] = $this->input->post("monthInvestAmount-rd");
 					    $investmentData["totalInvestment"] = $this->input->post("investAmount-rd");
 					    $investmentData["meturity"] = $this->input->post("meturtyAmount-rd"); 
 					    $investmentData["appliedIntrest"] = $this->input->post("appliedInterest-rd"); 
+
 					elseif($planID == 3):
+						$daybookData["amount"] = $this->input->post("monthAmount-nps");
 						$investmentData["pensionAmount"] = $this->input->post("planAMount-nps");
 						$investmentData["totalInvestment"] = $this->input->post("totalAmount-nps");
 						$investmentData["meturity"] = $this->input->post("meturtyAmount-nps");
 						$investmentData["investerAge"] = $this->input->post("investorAge-nps");
 						$investmentData["appliedIntrest"] = $this->input->post("appliedInterest-nps");
 						$investmentData["monthlyInvestment"] = $this->input->post("monthAmount-nps");
+
 					elseif($planID == 4):
+						$daybookData["amount"] = $this->input->post("investAmount-mip");
 						$investmentData["oneTimeInvestment"] = $this->input->post("investAmount-mip");
 						$investmentData["monthlyReturn"] = $this->input->post("monthlyReturn-mip");
 						$investmentData["meturity"] = $this->input->post("meturityAmount-mip");
 						$investmentData["appliedIntrest"] = $this->input->post("appliedInterest-mip");
-					endif;
 
+					endif;
+					$this->db->insert("daybook", $daybookData);
 					$this->load->model("investmentDetail");
 					if ($this->investmentDetail->setDetail($investmentData)):
 				        redirect(base_url().'customers.html');

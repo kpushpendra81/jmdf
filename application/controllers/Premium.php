@@ -160,6 +160,12 @@ class Premium extends CI_Controller {
 			"lateFee"		=>	explode(' ', $lateFee)[1],
 			"remark"		=>	$remark
 		);
+
+		$daybookData = array(
+			"amount" 			=> explode(' ', $totalAmount)[1],
+			"transactionType" 	=> $planID == 4 ? "debit" : "credit",
+			"source" 			=> "Premium Amount"
+		);
 		
 		if($planID == 1)
 			$this->db->insert("fddetail",$data);
@@ -172,6 +178,8 @@ class Premium extends CI_Controller {
 
 		if($planID == 4)
 			$this->db->insert("misdetail",$data);
+
+		$this->db->insert("daybook", $daybookData);
 
 		redirect("policydetail/$policyID", 'refresh');
 	}

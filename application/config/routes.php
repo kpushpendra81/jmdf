@@ -86,6 +86,9 @@ $route['printslip/(:any)'] = '/premium/printslip/$id';
 $route['collectpremium/:num'] = '/premium/collectpremium/$id';
 $route['setpremium'] = '/premium/setpremium';
 
+/* --------------- PLAN ------------------------- */
+$route['daybook'] = 'accounts/getdabook';
+
 
 
 
