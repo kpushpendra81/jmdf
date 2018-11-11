@@ -171,7 +171,7 @@ class Premium extends CI_Controller {
 			$this->db->insert("fddetail",$data);
 
 		if($planID == 2)
-			$this->db->insert("rddetail",$data);
+			$this->db->insert("rdDetail",$data);
 
 		if($planID == 3)
 			$this->db->insert("npsdetail",$data);

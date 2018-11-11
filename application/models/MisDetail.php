@@ -9,7 +9,7 @@ class MisDetail extends CI_Model {
 
 	function getDetail($policyID) {
 		$this->db->where('policyID', $policyID);
-		$result = $this->db->get('misDetail');
+		$result = $this->db->get('misdetail');
 		return $result->result();
 	}
 }
