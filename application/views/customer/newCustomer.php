@@ -112,7 +112,7 @@
 
 	                <label class="col-sm-2 control-label" for="form-control-12">Country</label>
 	                <div class="col-sm-4">
-	                  <input id="form-control-12" class="form-control" name="country" type="text" required="required" value="India">
+	                  <input id="form-control-12" class="form-control" name="country" type="text" readonly='true' required="required" value="India">
 	                  <?= form_error('country'); ?>
 	                </div>
 	              </div>
