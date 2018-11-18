@@ -21,13 +21,23 @@
 
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-1">Name</label>
+	                
 	                <div class="col-sm-4">
 	                  <input id="form-control-1" class="form-control" name="name" type="text" required="required" value="<?= set_value('name'); ?>">
 	                  <?= form_error('name'); ?>
 	                </div>
 
-	                <label class="col-sm-2 control-label" for="form-control-2">Father Name</label>
-	                <div class="col-sm-4">
+	                <label class="col-sm-2 control-label" for="form-control-2">Father/Husband Name</label>
+	                <div class="col-sm-1">
+	                  <select class="form-control" name="fatherHusband_title" required="required">
+	                  	<option>-Title-</option>
+	                  	<option value="Mr.">Mr.</option>
+	                  	<option value="Dr.">Dr.</option>
+	                  	<option value="Late">Late</option>
+	                  </select>
+	                  <?= form_error('fatherHusband_title'); ?>
+	                </div>
+	                <div class="col-sm-3">
 	                  <input id="form-control-2" class="form-control" name="fatherName" type="text" required="required" value="<?= set_value('fatherName'); ?>">
 	                  <?= form_error('fatherName'); ?>
 	                </div>
@@ -35,7 +45,16 @@
 
 	              <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-3">Mother Name</label>
-	                <div class="col-sm-4">
+	               	<div class="col-sm-1">
+	                  <select class="form-control" name="mother_title" required="required">
+	                  	<option>-Title-</option>
+	                  	<option value="Mrs.">Mrs.</option>
+	                  	<option value="Dr.">Dr.</option>
+	                  	<option value="Late">Late</option>
+	                  </select>
+	                  <?= form_error('mother_title'); ?>
+	                </div>
+	                <div class="col-sm-3">
 	                  <input id="form-control-3" class="form-control" name="motherName" type="text" required="required" value="<?= set_value('motherName'); ?>">
 	                  <?= form_error('motherName'); ?>
 	                </div>
@@ -169,10 +188,131 @@
 	              </div>
 
 	              <div class="divider divider-horizontal">
-                  <div class="divider-content text-primary"><h4>INVESTMENT PLAN DETAIL</h4></div>
-                </div>
+                  	<div class="divider-content text-primary"><h4>NOMINEE DETAIL</h4></div>
+                  </div>
 
-                <div class="form-group">
+                  <div class="form-group">
+	                <label class="col-sm-2 control-label" for="form-control-1">Nominee Name</label>
+	                <div class="col-sm-1">
+	                  <select class="form-control" name="mother_title" required="required">
+	                  	<option>-Title-</option>
+	                  	<option value="Mrs.">Mr.</option>
+	                  	<option value="Mrs.">Mrs.</option>
+	                  	<option value="Dr.">Dr.</option>
+	                  	<option value="Late">Late</option>
+	                  </select>
+	                  <?= form_error('mother_title'); ?>
+	                </div>
+	                <div class="col-sm-3">
+	                  <input id="form-control-1" class="form-control" name="nominee_name" type="text" required="required" value="<?= set_value('nominee_name'); ?>">
+	                  <?= form_error('nominee_name'); ?>
+	                </div>
+
+	                <label class="col-sm-2 control-label" for="form-control-2">Realtion</label>
+	                <div class="col-sm-4">
+	                  <input id="form-control-2" class="form-control" name="nominee_relation" type="text" required="required" value="<?= set_value('nominee_relation'); ?>">
+	                  <?= form_error('nominee_relation'); ?>
+	                </div>
+	              </div>
+
+	              <div class="form-group">
+	                <label class="col-sm-2 control-label" for="form-control-1">Gender</label>
+	                
+	                <div class="col-sm-4">
+	                  	<select class="form-control" name="nominee_gender" required="required">
+		                  	<option>-Select Gender-</option>
+		                  	<?php foreach ($gender as $key => $value) {
+		                  		$sel = set_value('nominee_gender') == $value ? " selected" : "";
+		                  		echo '<option value="'.$value.'" '.$sel.'>'.$value.'</option>';
+		                  	}
+		                  	?>
+	                  	</select>
+	                  	<?= form_error('nominee_gender'); ?>
+	                </div>
+
+	                <label class="col-sm-2 control-label" for="form-control-2">Full Address</label>
+	                <div class="col-sm-4">
+	                  <input id="form-control-2" class="form-control" name="nominee_full_address" type="text" required="required" value="<?= set_value('nominee_full_address'); ?>">
+	                  <?= form_error('nominee_full_address'); ?>
+	                </div>
+	              </div>
+
+	              <div class="form-group">
+
+	              	<label class="col-sm-2 control-label" for="form-control-2">Contact</label>
+	                <div class="col-sm-4">
+	                  <input id="form-control-2" class="form-control" name="nominee_contact" type="text" required="required" value="<?= set_value('nominee_contact'); ?>">
+	                  <?= form_error('nominee_contact'); ?>
+	                </div>
+
+	                <label class="col-sm-2 control-label" for="form-control-18">Signature</label>
+	                <div class="col-sm-4">
+	                  <input id="form-control-18" class="form-control" name="nominee_signature" type="file" required="required">
+	                  <?= form_error('nominee_signature'); ?>
+	                </div>
+
+	              </div>
+	              <div id="guarantor" style="display: none;">
+		              <div class="divider divider-horizontal">
+	                  	<div class="divider-content text-primary"><h4>GUARANTOR DETAIL</h4></div>
+	                  </div>
+
+	                  <div class="form-group">
+		                <label class="col-sm-2 control-label" for="form-control-1">Guarantor Name</label>
+		                <div class="col-sm-1">
+		                  <select class="form-control" name="guarantor_title" required="required">
+		                  	<option>-Title-</option>
+		                  	<option value="Mrs.">Mr.</option>
+		                  	<option value="Mrs.">Mrs.</option>
+		                  	<option value="Dr.">Dr.</option>
+		                  	<option value="Late">Late</option>
+		                  </select>
+		                  <?= form_error('guarantor_title'); ?>
+		                </div>
+		                <div class="col-sm-3">
+		                  <input id="form-control-1" class="form-control" name="guarantor_name" type="text" required="required" value="<?= set_value('guarantor_name'); ?>">
+		                  <?= form_error('guarantor_name'); ?>
+		                </div>
+
+		                <label class="col-sm-2 control-label" for="form-control-1">Guarantor Father Name</label>
+		                <div class="col-sm-1">
+		                  <select class="form-control" name="guarantor_father_title" required="required">
+		                  	<option>-Title-</option>
+		                  	<option value="Mrs.">Mr.</option>
+		                  	<option value="Dr.">Dr.</option>
+		                  	<option value="Late">Late</option>
+		                  </select>
+		                  <?= form_error('guarantor_father_title'); ?>
+		                </div>
+		                <div class="col-sm-3">
+		                  <input id="form-control-1" class="form-control" name="guarantor_father_name" type="text" required="required" value="<?= set_value('guarantor_father_name'); ?>">
+		                  <?= form_error('guarantor_father_name'); ?>
+		                </div>
+		              </div>
+
+	                  <div class="form-group">
+
+		              	<label class="col-sm-2 control-label" for="form-control-2">Address</label>
+		                <div class="col-sm-4">
+		                  <input id="form-control-2" class="form-control" name="guarantor_address" type="text" required="required" value="<?= set_value('guarantor_address'); ?>">
+		                  <?= form_error('guarantor_address'); ?>
+		                </div>
+
+		                <label class="col-sm-2 control-label" for="form-control-18">Aadhar Number</label>
+		                <div class="col-sm-4">
+		                  <input id="form-control-2" class="form-control" name="guarantor_aadhar_no" type="text" required="required" value="<?= set_value('guarantor_aadhar_no'); ?>">
+		                  <?= form_error('guarantor_aadhar_no'); ?>
+		                </div>
+
+		              </div>
+		            </div>
+
+
+	              <div class="divider divider-horizontal">
+                  	<div class="divider-content text-primary"><h4>INVESTMENT PLAN DETAIL</h4></div>
+                  </div>
+
+                  <div class="form-group">
 	                <label class="col-sm-2 control-label" for="form-control-20">Branch</label>
 	                <div class="col-sm-4">
 	                  <select id="demo-select2-1" class="form-control" name="branchID" onchange="getComittee(this.value)" required="required">
@@ -202,6 +342,7 @@
 	                		foreach ($plans as $key => $value):
 	                			echo '<option value="'.$value->id.'">'.$value->title.'</option>';
 	                		endforeach;
+	                		echo '<option value="5">LOAN</option>';
 	                	?>
 	                  </select>
 	                  <?= form_error('planID'); ?>
@@ -398,137 +539,143 @@
 	}
 
 	function getPlan(planID) {
-		$.ajax({
-			url: '<?= site_url() ?>plans.html',
-			method: "POST",
-			data: {id: planID},
-			success: function(data){
+		if(planID == '5')
+			$("#guarantor").removeAttr("style")
+		else {
+			$("#guarantor").css("display", "none")
 
-				let durationFlag = false
+			$.ajax({
+				url: '<?= site_url() ?>plans.html',
+				method: "POST",
+				data: {id: planID},
+				success: function(data){
 
-				$(`#planDetail`).val(data)
+					let durationFlag = false
 
-				if(planID == '1')
-					$("#fd").removeAttr("style")
-				else
-					$("#fd").css("display", "none")
+					$(`#planDetail`).val(data)
 
-				if(planID == '2')
-					$("#rd").removeAttr("style")
-				else
-					$("#rd").css("display", "none")
+					if(planID == '1')
+						$("#fd").removeAttr("style")
+					else
+						$("#fd").css("display", "none")
 
-				if(planID == '3'){
-					$("#nps").removeAttr("style")
-					$("#durationTitle").html("Policy Age")
+					if(planID == '2')
+						$("#rd").removeAttr("style")
+					else
+						$("#rd").css("display", "none")
 
-					let dob = $("#form-control-4").val()
-					if(dob == ''){
-						alert("Please provide (Date of Birth)-DOB first.")
-						$("#form-control-4").focus()
+					if(planID == '3'){
+						$("#nps").removeAttr("style")
+						$("#durationTitle").html("Policy Age")
 
-						$("#nps").css("display", "none")
-						$("#durationTitle").html("Duration")
-						$("#demo-select2-3").val($("#demo-select2-3 option:first").val())
+						let dob = $("#form-control-4").val()
+						if(dob == ''){
+							alert("Please provide (Date of Birth)-DOB first.")
+							$("#form-control-4").focus()
 
-						durationFlag = true
-					}
-					else {
-						dob = dob.split("-")
-						const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 31556925994)
-						let age = getAge(`${dob[2]}-${dob[1]}-${dob[0]}`)
-						$("#investerAge").val(age) // 23
-
-						if(parseInt(age) < 18) {
-							alert("Candidate must be adult, age grater then 18.")
 							$("#nps").css("display", "none")
 							$("#durationTitle").html("Duration")
 							$("#demo-select2-3").val($("#demo-select2-3 option:first").val())
+
 							durationFlag = true
 						}
+						else {
+							dob = dob.split("-")
+							const getAge = birthDate => Math.floor((new Date() - new Date(birthDate).getTime()) / 31556925994)
+							let age = getAge(`${dob[2]}-${dob[1]}-${dob[0]}`)
+							$("#investerAge").val(age) // 23
+
+							if(parseInt(age) < 18) {
+								alert("Candidate must be adult, age grater then 18.")
+								$("#nps").css("display", "none")
+								$("#durationTitle").html("Duration")
+								$("#demo-select2-3").val($("#demo-select2-3 option:first").val())
+								durationFlag = true
+							}
+						}
+
+					}
+					else{
+						$("#nps").css("display", "none")
+						$("#durationTitle").html("Duration")
 					}
 
-				}
-				else{
-					$("#nps").css("display", "none")
-					$("#durationTitle").html("Duration")
-				}
+					if(planID == '4')
+						$("#mip").removeAttr("style")
+					else
+						$("#mip").css("display", "none")
 
-				if(planID == '4')
-					$("#mip").removeAttr("style")
-				else
-					$("#mip").css("display", "none")
+					if(planID == '3'){
+						let options = `<option value="">-select Duration-</option>`
+						let age = $("#investerAge").val()
+						age = parseInt(age)
 
-				if(planID == '3'){
-					let options = `<option value="">-select Duration-</option>`
-					let age = $("#investerAge").val()
-					age = parseInt(age)
+						if(parseInt(age) < 18){
+							options += ``
+						}
+						else if(age >= 18 && age <= 25) {
+							if(age == 25){
+								options += `<option value="35">35</option><option value="42">42</option>`
+							}
+							else {
+								options += `<option value="42">42</option>`
+							}
+						}
+						else if(age >= 25 && age <= 30) {
+							if(age == 30){
+								options += `<option value="30">30</option><option value="35">35</option>`
+							}
+							else {
+								options += `<option value="35">35</option>`
+							}
+						}
+						else if(age >= 30 && age <= 35) {
+							if(age == 35){
+								options += `<option value="25">25</option><option value="30">30</option>`
+							}
+							else {
+								options += `<option value="30">30</option>`
+							}
+						}
+						else if(age >= 35 && age <= 40) {
+							if(age == 40){
+								options += `<option value="20">20</option><option value="25">25</option>`
+							}
+							else {
+								options += `<option value="25">25</option>`
+							}
+						}
+						else if(age >= 40 && age <= 45) {
+							if(age == 45){
+								options += `<option value="10">10</option><option value="20">20</option>`
+							}
+							else {
+								options += `<option value="20">20</option>`
+							}
+						}
+						else if(age >= 45 && age <= 50) {
+								options += `<option value="10">10</option>`
+						}
+						else {
+							options += `<option value="">Not eligble for plan, you are over-age.</option>`
+						}
 
-					if(parseInt(age) < 18){
-						options += ``
-					}
-					else if(age >= 18 && age <= 25) {
-						if(age == 25){
-							options += `<option value="35">35</option><option value="42">42</option>`
-						}
-						else {
-							options += `<option value="42">42</option>`
-						}
-					}
-					else if(age >= 25 && age <= 30) {
-						if(age == 30){
-							options += `<option value="30">30</option><option value="35">35</option>`
-						}
-						else {
-							options += `<option value="35">35</option>`
-						}
-					}
-					else if(age >= 30 && age <= 35) {
-						if(age == 35){
-							options += `<option value="25">25</option><option value="30">30</option>`
-						}
-						else {
-							options += `<option value="30">30</option>`
-						}
-					}
-					else if(age >= 35 && age <= 40) {
-						if(age == 40){
-							options += `<option value="20">20</option><option value="25">25</option>`
-						}
-						else {
-							options += `<option value="25">25</option>`
-						}
-					}
-					else if(age >= 40 && age <= 45) {
-						if(age == 45){
-							options += `<option value="10">10</option><option value="20">20</option>`
-						}
-						else {
-							options += `<option value="20">20</option>`
-						}
-					}
-					else if(age >= 45 && age <= 50) {
-							options += `<option value="10">10</option>`
+						let select = `<select id="demo-select2-4" class="form-control" name="duration" onchange='getAppliedInterestRate(this.value);'>${options}</select>`
+						$(`#durationSelect`).html(select)
+
+						if(durationFlag)
+							$(`#durationSelect`).html('')
 					}
 					else {
-						options += `<option value="">Not eligble for plan, you are over-age.</option>`
+						let options = `<option value="">-select Duration-</option>`
+						options += JSON.parse(data).result.map(val => { return `<option value='${val.duration}'>${val.duration} Years</option>` }).join("")
+						let select = `<select id="demo-select2-4" class="form-control" name="duration" onchange='getAppliedInterestRate(this.value);'>${options}</select>`
+						$(`#durationSelect`).html(select)
 					}
 
-					let select = `<select id="demo-select2-4" class="form-control" name="duration" onchange='getAppliedInterestRate(this.value);'>${options}</select>`
-					$(`#durationSelect`).html(select)
-
-					if(durationFlag)
-						$(`#durationSelect`).html('')
 				}
-				else {
-					let options = `<option value="">-select Duration-</option>`
-					options += JSON.parse(data).result.map(val => { return `<option value='${val.duration}'>${val.duration} Years</option>` }).join("")
-					let select = `<select id="demo-select2-4" class="form-control" name="duration" onchange='getAppliedInterestRate(this.value);'>${options}</select>`
-					$(`#durationSelect`).html(select)
-				}
-
-			}
-		})
+			})
+		}
 	}
 
 	function getperMonthAmount(plan) {
