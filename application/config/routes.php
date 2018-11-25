@@ -64,6 +64,7 @@ $route['newbranch'] = '/settings/newbranch';
 $route['financial'] = '/settings/financial';
 $route['rank'] = '/settings/rank';
 $route['role'] = '/settings/role';
+$route['loansettings'] = 'settings/loansettings';
 
 /* --------------- EMPLOYEE ------------------------- */
 $route['employes'] = '/employee/employes';
@@ -88,6 +89,8 @@ $route['setpremium'] = '/premium/setpremium';
 
 /* --------------- PLAN ------------------------- */
 $route['daybook'] = 'accounts/getdabook';
+
+/* --------------- LOAN ------------------------- */
 
 
 

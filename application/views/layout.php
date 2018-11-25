@@ -229,6 +229,7 @@
                     <li><a href="<?= base_url() ?>role.html">Role</a></li>
                     <li><a href="<?= base_url() ?>committees.html">Committees</a></li>
                     <li><a href="<?= base_url() ?>branches.html">Branches</a></li>
+                    <li><a href="<?= base_url() ?>loansettings.html">Loan Settings</a></li>
                     <!-- <li><a href="<?= base_url() ?>plans.html">Plans</a></li> -->
                   </ul>
                 </li>

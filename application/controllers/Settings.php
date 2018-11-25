@@ -66,6 +66,49 @@ class Settings extends CI_Controller {
 		}
 	}
 
+	public function loansettings() {
+		if ($this->input->server('REQUEST_METHOD') == 'GET') {
+
+			if(isset($_GET['year'])):
+
+				$branchID = $this->input->get('branchID');
+				$this->load->model('role');
+				$result = $this->role->getRoles($branchID);
+				echo json_encode($result);
+
+			else:
+
+				$this->load->model("branch");
+				$branch = $this->branch->getBranch();
+				$data['branch']		= $branch;
+
+				$data['title'] = 'Loan Settings';
+				$data['body'] = 'settings/loanSettings';
+				$this->load->view('layout',$data);
+
+			endif;
+		}
+		else if($this->input->server('REQUEST_METHOD') == 'POST') {
+			$branchID = $this->input->post('branchID');
+			$title = $this->input->post('title');
+			
+			$roleData = array(
+				"branchID" => $branchID,
+				"title" => $title
+			);
+			$this->load->model('role');
+
+			if($this->input->post("edit") != 'false')
+				$this->role->updateRole($roleData, $this->input->post("id"));
+			else 
+				$this->role->setRole($roleData);
+
+			$result = $this->role->getRoles($branchID);
+			echo json_encode($result);
+
+		}
+	}
+
 	public function committees() {
 		$this->load->model("commitee");
 		$commitee = $this->commitee->getAllCommittees();
